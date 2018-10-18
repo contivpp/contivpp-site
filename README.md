@@ -1,6 +1,7 @@
 CVPP
 ====
 
+[![Build Status](https://travis-ci.org/contiv/cvpp-site.svg?branch=master)](https://travis-ci.org/contiv/cvpp-site)
 [![GitHub license](https://img.shields.io/badge/license-Apache%20license%202.0-blue.svg)](https://github.com/ligato/networkservicemesh-site/blob/master/LICENSE)
 
 This is the CVPP website. It was created using
