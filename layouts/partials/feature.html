@@ -1,0 +1,23 @@
+<section id="feature">
+    <div class="container">
+      <div class="row">
+        <!--<div class="col-md-5 col-sm-12">-->
+            <!--<div class="block">-->
+                <!--<img src="img/welcome-cvpp-feature2.png" alt="Img" class="img-responsive">-->
+            <!--</div>-->
+        <!--</div>-->
+        <div class="col-md-9 col-sm-12 ">
+            <div class="block">
+                <h2 class="text-uppercase">{{ .Site.Params.feature.title }}</h2>
+                {{ .Site.Params.feature.content | markdownify }}
+            </br>
+            </br>
+                {{ with .Site.Params.feature.button }}
+                    <a href="{{ .url }}" class="btn btn-main">{{ .caption }}</a>
+                {{ end }}
+            </div>
+        </div>
+      </div>
+    </div>
+</div>
+</section>
