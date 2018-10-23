@@ -1,5 +1,5 @@
-title = "cvpp-landing"
-baseURL = ""
+title = "pteropus"
+baseURL = "https://pteropus.io"
 languageCode = "en-us"
 theme = "airspace-hugo"
 
