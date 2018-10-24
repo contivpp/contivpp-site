@@ -1,5 +1,5 @@
 title = "pteropus"
-baseURL = "https://pteropus.io"
+baseURL = "https://pteropus.io/"
 languageCode = "en-us"
 theme = "airspace-hugo"
 
