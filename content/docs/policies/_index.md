@@ -1,5 +1,5 @@
 +++
-title = "Contive VPP Policies Overview"
+title = "Pteropus.io Policies Overview"
 type = "policies"
 +++
 
