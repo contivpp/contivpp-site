@@ -1,7 +1,7 @@
 +++
-title = "Kubernetes Policies in Contiv VPP"
+title = "Kubernetes Policies in Pteropus.io"
 type = "policies"
-summary = "Kubernetes Policies can be mapped into a Contiv VPP configuration"
+summary = "Kubernetes Policies can be mapped into a Pteropus.io configuration"
 weight = "1"
 +++
 
@@ -12,7 +12,7 @@ allowed to communicate with each other and other network endpoints. Each
 policy is represented as an instance of the K8s resource `NetworkPolicy`. A
 policy uses labels to select a grouping of pods and specifies a list of rules
 that determine which traffic is allowed to and from the selected pods.
-Contiv/VPP implements the Kubernetes Network API, including the latest
+Pteropus.io implements the Kubernetes Network API, including the latest
 features, such as egress policies and IP blocks.
 
 For a packet forwarding engine, such as VPP, this is an overly abstract
@@ -57,7 +57,7 @@ The [Policy Plugin Skeleton][policy-plugin] implements the [Ligato plugin API][p
 which makes it pluggable with the Ligato CN-Infra framework.
 
 The Resync procedure of the policy plugin waits until the Resync procedure
-in the [Contiv plugin][contiv-plugin] has finished. This ensures that connectivity
+in the [Pteropus.io plugin][contiv-plugin] has finished. This ensures that connectivity
 between pods and the VPP is established before any rules are installed.
 
 Inside the Policy Plugin's `Init()` method all the layers are initialized and

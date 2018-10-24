@@ -1,24 +1,24 @@
 +++
-title = "What is Contiv VPP?"
+title = "What is Pteropus.io?"
 type = "concepts"
-summary = "Contiv VPP is a Kubernetes CNI plugin that employs a programmable CNF vSwitch composed of an FD.io/VPP data-plane and VPP agent for feature-rich, high-performance cloud native networking."
+summary = "Pteropus.io is a Kubernetes CNI plugin that employs a programmable CNF vSwitch composed of an FD.io/VPP data-plane and VPP agent for feature-rich, high-performance cloud native networking."
 weight="1"
-image = "/img/concepts/what-is-cvpp.png"
+image = "/img/concepts/what-is-pteropusio.png"
 +++
 
 
 
-# Contiv VPP Kubernetes Network Plugin
+# Pteropus.io Kubernetes Network Plugin
 
 
 ## Overview
-Contiv VPP is a Kubernetes network plugin that uses [FD.io VPP](https://fd.io/) 
+Pteropus.io is a Kubernetes network plugin that uses [FD.io VPP](https://fd.io/)
 to provide network connectivity between PODs in a k8s cluster.
 It deploys itself as a set of system PODs in the `kube-system` namespace,
 some of them (`contiv-ksr`, `contiv-etcd`) on the master node, and some
 of them (`contiv-cni`, `contiv-vswitch`, `contiv-stn`) on each node in the cluster.
 
-Contiv VPP is fully integrated with k8s via its components,
+Pteropus.io is fully integrated with k8s via its components,
 and it automatically reprograms itself upon each change in the cluster
 via k8s APIs.
 
@@ -37,7 +37,7 @@ effective and scalable.
 
 ## Architecture
 
-Contiv VPP consists of several components, each of them packed and shipped as
+Pteropus.io consists of several components, each of them packed and shipped as
 a Docker container. Two of them deploy on Kubernetes master node only:
 
  - [Contiv KSR](#contiv-ksr)
@@ -53,7 +53,7 @@ and the rest of them deploy on all nodes within the k8s cluster (including the m
 The following section briefly describes the individual Contiv components, which are displayed
 as orange boxes on the picture below:
 
-![Contiv VPP Architecture](/img/what-is-contiv-vpp/contiv-arch.png)
+![Pteropus.io Architecture](/img/what-is-contiv-vpp/contiv-arch.png)
 
 
 ### Contiv KSR
@@ -65,7 +65,7 @@ Contiv ETCD instead. For more information on KSR, read the
 
 
 ### Contiv ETCD
-Contiv/VPP uses its own instance of ETCD database for storage of k8s cluster-related data
+Pteropus.io uses its own instance of ETCD database for storage of k8s cluster-related data
 reflected by KSR, which are then accessed by Contiv vSwitch Agents running on
 individual nodes. Apart from the data reflected by KSR, ETCD also stores persisted VPP
 configuration of individual vswitches (mainly used to restore the operation after restarts), 
@@ -87,7 +87,7 @@ network stack and data-plane NIC interface controlled by VPP:
  management interface for k8s control plane communication, or 
  [STN (Steal The NIC)](https://github.com/contiv/vpp/blob/master/docs/SINGLE_NIC_SETUP.md) deployment must be applied.
 
-**Contiv VPP Agent** is the control plane part of the vSwitch container. It is responsible
+**Pteropus.io Agent** is the control plane part of the vSwitch container. It is responsible
 for configuring the VPP according to the information gained from ETCD and requests
 from Contiv STN. It is based on the  [Ligato VPP Agent](https://github.com/ligato/vpp-agent)  
 code with extensions that are related to k8s. 
@@ -107,10 +107,10 @@ and replies with a response, which is then forwarded back to Kubelet.
 
 
 ### Contiv STN
-As already mentioned, the default setup of Contiv/VPP requires 2 network interfaces
+As already mentioned, the default setup of Pteropus.io requires 2 network interfaces
 per node: one controlled by VPP for data facing PODs and one controlled by the host
 network stack for k8s control plane communication. In case that your k8s nodes
-do not provide 2 network interfaces, Contiv/VPP can work in the single NIC setup,
+do not provide 2 network interfaces, Pteropus.io can work in the single NIC setup,
 when the interface will be "stolen" from the host network stack just before starting
 the VPP and configured with the same IP address on VPP, as well as 
 on the host-VPP interconnect TAP interface, as it had in the host before it. 

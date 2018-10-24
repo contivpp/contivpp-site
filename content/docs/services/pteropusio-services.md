@@ -1,10 +1,10 @@
 +++
-title = "Kubernetes Services in Contiv VPP"
+title = "Kubernetes Services in Pteropus.io"
 type = "services"
-summary = "Kubernetes Services can be mapped into a Contiv VPP configuration"
+summary = "Kubernetes Services can be mapped into a Pteropus.io configuration"
 +++
 
-# Kubernetes Services in Contiv VPP
+# Kubernetes Services in Pteropus.io
 
 ## Overview
 
@@ -43,7 +43,7 @@ itself) is assigned a DNS name `<service-name.service.namespace>`. By default,
 every pod’s DNS search list will include the pod’s own namespace and the cluster’s
 default domain.
 
-Contiv/VPP implements Kubernetes services in the full scope of the specification
+Pteropus.io implements Kubernetes services in the full scope of the specification
 for the IP protocol version 4.
 
 ## Kube-proxy
@@ -54,7 +54,7 @@ and can do simple TCP and UDP stream forwarding or round robin TCP/UDP
 load-balancing across a set of backends using iptables or [IPVS (IP Virtual Server)][ipvs].
 
 While other CNI plugin providers rely heavily on kube-proxy for their services
-implementations, in Contiv/VPP Kube proxy plays a secondary role. For the most
+implementations, in Pteropus.io Kube proxy plays a secondary role. For the most
 part, load-balancing and translations between services and endpoints are done
 **inside VPP** using the high performance [VPP-NAT plugin](#the-vpp-nat-plugin).
 The only exception is traffic initiated from the host stack on one of the cluster
@@ -73,16 +73,16 @@ it should be possible to plug the NAT44 function together with the MAP-E IPv4
 to IPv6 translator to create a MAP-E CE, likewise one can plug the NAT44
 together with MAP-T to create a MAP-T CE or 464XLAT.
 
-In Contiv-VPP the VPP-NAT plugin is used in the data-plane to:
+In Pteropus.io the VPP-NAT plugin is used in the data-plane to:
  1. Load-balance and forward *IPv4* traffic between services and endpoints,
     i.e. **1-to-many NAT**,
  2. **Dynamically source-NAT** node-outbound *IPv4* traffic to enable Internet
     access for pods with private addresses.
 
 The following subsection describes key VPP-NAT configuration items, focusing
-on features used in the Contiv-VPP data plane. Certain aspects of the VPP-NAT
+on features used in the Pteropus.io data plane. Certain aspects of the VPP-NAT
 configuration are explained in a greater detail as they play a pivotal role
-in the implementation of Kubernetes services in Contiv-VPP.
+in the implementation of Kubernetes services in Pteropus.io.
 
 ### Configuration
 #### Interface features
@@ -140,9 +140,9 @@ The fields in the above structure are as follows:
  * `protocol`: IP protocol number of the service (UDP or TCP).
  * `vrf_id`: internal network VRF ID.
  * `twice_nat`: translate both the source and destination address with a single
-   rule. Twice NAT is not used in Contiv-VPP - source-NAT is not applied for
+   rule. Twice NAT is not used in Pteropus.io - source-NAT is not applied for
    intra-node traffic.
- * `self-twice-nat`: a special feature added for Contiv to enable access
+ * `self-twice-nat`: a special feature added for Pteropus.io to enable access
    to service from one of its own endpoints (i.e. access from itself). If you hit
    the same endpoint as the request originated from, then the source and
    destination IPs are equal after DNAT translation. This is an issue because
@@ -160,7 +160,7 @@ The fields in the above structure are as follows:
    the mapping would apply (as source NAT) also for connections initiated from
    the local IPs, replacing the source address with the external IP (breaking
    policies for example).
- * `tag`: string tag opaque to VPP-NAT plugin. Used by Contiv-VPP control plane
+ * `tag`: string tag opaque to VPP-NAT plugin. Used by Pteropus.io control plane
    to associate NAT rule with the corresponding service, which is needed by the
    re-sync procedure.
  * `local_num`: the number of local endpoints.
@@ -180,7 +180,7 @@ vpp# nat44 add address 1.2.3.4
 ```
 
 #### Identity mappings
-In Contiv/VPP we also use of **identity mappings**. An identity mapping is a
+In Pteropus.io we also use of **identity mappings**. An identity mapping is a
 static NAT mappings that lets a real addresses to be translated to itself,
 essentially bypassing NAT.
 
@@ -190,13 +190,13 @@ to learn how we map the state of Kubernetes services into VPP-NAT configuration.
 ### VPP-NAT plugin limitations
 
 The VPP-NAT plugin is a relatively recent addition to the VPP toolbox, and some
-of its limitations impact Contiv-VPP. They are:
+of its limitations impact Pteropus.io. They are:
  1. Tracking of TCP sessions is experimental and has not been fully tested
  2. Not all dynamically created sessions are automatically cleaned up
  3. Translations are endpoint **independent**, which affects certain communication
     scenarios, mostly in the STN mode
 
-## Services implementation in Contiv-VPP control plane
+## Services implementation in Pteropus.io control plane
 ### VPP-NAT support in the Ligato VPP Agent
 
 The VPP-NAT plugin for IPv4 is configured through the [vpp/ifplugin][vpp-agent-if-plugin]
@@ -217,7 +217,7 @@ definition. The northbound API model consists of two parts:
 
 ### Mapping of services to VPP-NAT configurations
 
-In Contiv/VPP, a service is implemented as a set of VPP-NAT static mappings,
+In Pteropus.io, a service is implemented as a set of VPP-NAT static mappings,
 one for every external address. Static mappings of a single service are grouped
 together and exported as a single instance of the [DNAT model][nat-model]
 (destination NAT) for the [Ligato VPP Agent][ligato-vpp-agent] to configure.
@@ -357,11 +357,11 @@ where the Pod can be scheduled - the host port is statically set to a fixed
 value, which automatically excludes all nodes where the same port is already
 in use as there would be a port collision otherwise.
 
-Still the feature is supported by Contiv/VPP, as it required no extra effort
+Still the feature is supported by Pteropus.io, as it required no extra effort
 to get it supported. The CNI (Container Network Interface) already ships with
 [Port-mapping plugin][portmap-plugin], implementing redirection between host
 ports and container ports using iptables. We only had to enable the plugin
-in the [CNI configuration file for Contiv/VPP][contiv-cni-conflist].
+in the [CNI configuration file for Pteropus.io][contiv-cni-conflist].
 Since the forwarding occurs in the realm of iptables on the host stack,
 you will not get the same performance benefits as with `VPP-NAT`-based
 redirection for NodePorts and other service types. Another limitation is that
