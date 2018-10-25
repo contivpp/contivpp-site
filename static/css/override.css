@@ -19,6 +19,19 @@
     color: 	#3FFF00;
 }
 
+#slider:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to left, #00638e, #003655 70%);
+    opacity: 0.8;
+
+
 #intro .block p {
   color: #7B7B7B;
   padding-top: 20px;
