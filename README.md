@@ -1,8 +1,8 @@
 pteropus.io
 ===========
 
-[![Build Status](https://travis-ci.org/pteropusio/pteropusio-site.svg?branch=master)](https://travis-ci.org/pteropusio/pteropusio-site)
-[![GitHub license](https://img.shields.io/badge/license-Apache%20license%202.0-blue.svg)](https://github.com/pteropusio/pteropusio-site/blob/master/LICENSE)
+[![Build Status](https://travis-ci.org/contivpp/contivpp-site.svg?branch=master)](https://travis-ci.org/contivpp/contivpp-site)
+[![GitHub license](https://img.shields.io/badge/license-Apache%20license%202.0-blue.svg)](https://github.com/contivpp/contivpp-site/blob/master/LICENSE)
 
 This is the pteropus.io website. It was created using
 [Hugo](https://gohugo.io/) with the [Airspace Hugo theme](https://themes.gohugo.io/airspace-hugo/).
