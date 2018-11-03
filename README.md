@@ -1,10 +1,10 @@
-pteropus.io
+contivpp.io
 ===========
 
 [![Build Status](https://travis-ci.org/contivpp/contivpp-site.svg?branch=master)](https://travis-ci.org/contivpp/contivpp-site)
 [![GitHub license](https://img.shields.io/badge/license-Apache%20license%202.0-blue.svg)](https://github.com/contivpp/contivpp-site/blob/master/LICENSE)
 
-This is the pteropus.io website. It was created using
+This is the contivpp.io website. It was created using
 [Hugo](https://gohugo.io/) with the [Airspace Hugo theme](https://themes.gohugo.io/airspace-hugo/).
 
 NOTE: The theme has been added as a git submodule, so to ensure this is checked out
