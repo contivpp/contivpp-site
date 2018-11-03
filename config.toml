@@ -57,7 +57,7 @@ theme = "airspace-hugo"
 #    subtitle = "Catch up with us, anytime and anywhere"
 #    draft = true
 
-# points to feature.html in partials
+# points to feature.html in layouts/partials
   [params.feature]
     enable = true
     title = "contivpp.io Highlights"
