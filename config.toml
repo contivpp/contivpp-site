@@ -8,21 +8,36 @@ theme = "airspace-hugo"
 
   [[menu.header]]
     weight = 1
-    name = "DOCUMENTATION"
+    name = "OVERVIEW"
     url = "/docs"
-    
+  
   [[menu.header]]
     weight = 2
+    name = "ARCHITECTURE"
+    url = "/docs"  
+
+  [[menu.header]]
+    weight = 3
+    name = "GET STARTED"
+    url = "/docs"  
+
+  [[menu.header]]
+    weight = 4
+    name = "DEMO"
+    url = "/docs"
+
+  [[menu.header]]
+    weight = 5
     name = "GITHUB"
     url = "https://github.com/contiv/vpp"
 
   [[menu.header]]
-    weight = 3
+    weight = 6
     name = "BLOG"
     url = "/blog"
   
   [[menu.header]]
-    weight = 4
+    weight = 7
     name = "SLACK"
     url = "https://contivvpp.slack.com/"
 
