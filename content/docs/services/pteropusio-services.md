@@ -1,10 +1,10 @@
 +++
-title = "Kubernetes Services in contivpp.io"
+title = "Kubernetes Services in Contivpp.io"
 type = "services"
-summary = "Kubernetes Services can be mapped into a contivpp.io configuration"
+summary = "Kubernetes Services can be mapped into a Contivpp.io configuration"
 +++
 
-# Kubernetes Services in contivpp.io
+# Kubernetes Services in Contivpp.io
 
 ## Overview
 

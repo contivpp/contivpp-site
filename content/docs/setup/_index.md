@@ -1,4 +1,0 @@
-+++
-title = "Setup"
-type = "setup"
-+++
