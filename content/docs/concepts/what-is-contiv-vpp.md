@@ -1,24 +1,24 @@
 +++
-title = "What is Contivpp.io?"
+title = "What is contivpp.io?"
 type = "concepts"
-summary = "Contivpp.io is a Kubernetes CNI plugin that employs a programmable CNF vSwitch composed of an FD.io/VPP data-plane and VPP agent for feature-rich, high-performance cloud native networking."
+summary = "contivpp.io is a Kubernetes CNI plugin that employs a programmable CNF vSwitch composed of an FD.io/VPP data-plane and VPP agent for feature-rich, high-performance cloud native networking."
 weight="1"
 image = "/img/concepts/what-is-pteropusio.png"
 +++
 
 
 
-# Contivpp.io Kubernetes Network Plugin
+# contivpp.io Kubernetes Network Plugin
 
 
 ## Overview
-Contivpp.io is a Kubernetes network plugin that uses [FD.io VPP](https://fd.io/)
+contivpp.io is a Kubernetes network plugin that uses [FD.io VPP](https://fd.io/)
 to provide network connectivity between PODs in a k8s cluster.
 It deploys itself as a set of system PODs in the `kube-system` namespace,
 some of them (`contiv-ksr`, `contiv-etcd`) on the master node, and some
 of them (`contiv-cni`, `contiv-vswitch`, `contiv-stn`) on each node in the cluster.
 
-Contivpp.io is fully integrated with k8s via its components,
+contivpp.io is fully integrated with k8s via its components,
 and it automatically reprograms itself upon each change in the cluster
 via k8s APIs.
 
