@@ -9,22 +9,17 @@ theme = "airspace-hugo"
   [[menu.header]]
     weight = 1
     name = "OVERVIEW"
-    url = "/docs"
-  
-  [[menu.header]]
-    weight = 2
-    name = "ARCHITECTURE"
-    url = "/docs"  
+    url = "/docs" 
 
   [[menu.header]]
     weight = 3
     name = "GET STARTED"
-    url = "/docs"  
+    url = "/setup"  
 
   [[menu.header]]
     weight = 4
     name = "DEMO"
-    url = "/docs"
+    url = "/demo"
 
   [[menu.header]]
     weight = 5
