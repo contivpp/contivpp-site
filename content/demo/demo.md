@@ -1,5 +1,6 @@
 +++
 title = "Contivpp.io Demo"
+type = "setup"
 summary = "Setting up and Running a Contivpp.io Live Demo"
 +++
 
