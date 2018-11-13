@@ -4,7 +4,7 @@ date = 2018-08-17T16:18:07-05:00
 summary = "Lots coming on a raft of bloggy-things, contivpp.io and otherwise over the next 30 days and beyond. Check 'em Out!"
 tags = ["contivpp.io"]
 categories = ["contivpp.io"]
-draft = true
+draft = false
 type = "blog"
 weight = 2
 +++
