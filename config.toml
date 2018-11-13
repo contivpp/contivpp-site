@@ -65,7 +65,7 @@ theme = "airspace-hugo"
     enable = true
 #    title = "Get The Latest On What We're doing"
 #    subtitle = "Catch up with us, anytime and anywhere"
-#    draft = false
+     draft = true
 
 # points to feature.html in layouts/partials
   [params.feature]
