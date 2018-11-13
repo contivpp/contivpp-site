@@ -61,8 +61,8 @@ theme = "airspace-hugo"
     title = "Challenges"
     paragraph = "Kubernetes defines the Container Network Interface (CNI) – an API for network plugins providing connectivity between PODs. That’s worked well so far, but as cloud native deployments grow and more services are added, new solutions are needed. First, there is currently no API to map Kubernetes services and policies to network configurations so it’s up to network plugin implementers to figure that out. A standard suite of APIs based on open source code would solve that problem. Second, the current use of kube-proxy (with iptables) limits network performance, scale and feature updates required to meet new service and policy demands. Moving all network functions (including data plane and control plane) to user space increases performance, scale, reliability and innovation velocity."
 
-#  [params.blog]
-#    enable = true
+  [params.blog]
+    enable = true
 #    title = "Get The Latest On What We're doing"
 #    subtitle = "Catch up with us, anytime and anywhere"
 #    draft = true
