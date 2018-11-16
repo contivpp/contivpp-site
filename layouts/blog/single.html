@@ -20,7 +20,10 @@
 	              <p class="italic">By <span class="bold">{{ .Params.author }}</span> on <span class="bold">{{ .Site.Params.dateFormat | default "Jan 2, 2006" | .Date.Format }}</span></p>
 	            </div>
 	            <hr />
-	            <p>{{ .Content }}</p>
+	            <div class="block markdown-body">
+	            <p>{{ .Content | markdownify }}</p>
+	        	</div>
+	            <!-- <p>{{ .Content }}</p> -->
 	          </div>
 	        </div><!-- .col-md-7 close -->
 	      </div>
