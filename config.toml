@@ -86,7 +86,7 @@ theme = "airspace-hugo"
 
 """
     [params.feature.button]
-      caption = "View Documentation"
+      caption = "Check it out!"
       url = "/docs"
 
   [params.call]
