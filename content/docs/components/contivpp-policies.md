@@ -1,11 +1,11 @@
 +++
-title = "Kubernetes Policies in Contivpp.io"
-type = "policies"
-summary = "Kubernetes Policies can be mapped into a Contivpp.io configuration"
+title = "K8s Policies"
+type = "components"
+summary = "How Contivpp.io handles Kubernetes Policies."
 weight = "1"
 +++
 
-## Overview
+<!-- ## Overview -->
 
 [Kubernetes network policies][network-policy] specify how groups of pods are
 allowed to communicate with each other and other network endpoints. Each
