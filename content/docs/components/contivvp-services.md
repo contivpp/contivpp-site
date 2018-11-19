@@ -1,7 +1,8 @@
 +++
-title = "Kubernetes Services in Contivpp.io"
-type = "services"
-summary = "Kubernetes Services can be mapped into a Contivpp.io configuration"
+title = "K8s Services"
+type = "components"
+summary = "How Contivpp.io handles Kubernetes Services"
+weight = "2"
 +++
 
 # Kubernetes Services in Contivpp.io
