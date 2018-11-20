@@ -4,7 +4,7 @@ type = "setup"
 summary = "Setup and run a Kubernetes cluster with Contivpp.io"
 +++
 
-## Get Started
+# Get Started
 
 You can get started with Contivpp.io using one of serveral methods:
 
@@ -21,3 +21,9 @@ You can get started with Contivpp.io using one of serveral methods:
 * Use the [Arm64-specific kubeadm install](https://github.com/contiv/vpp/blob/master/docs/arm64/MANUAL_INSTALL_ARM64.md) instructions to manually
   install Kubernetes with contivpp.io networking on one or more bare-metal
   of Arm64 platform.
+
+## [Configuration and Troubleshooting Tools](https://github.com/contiv/vpp/blob/master/docs/TOOLS.md)
+
+
+
+
