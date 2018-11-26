@@ -19,7 +19,7 @@
 						<a class="post-title" href="{{ .Permalink }}"><img src="{{ .Params.image | absURL }}" class="img-responsive" alt="post-thumb"></a> {{ end }}
 						<a class="post-title" href="{{ .Permalink }}">{{ .Title }}</a>
 						<p>
-                            {{ partial "summary" .}}
+                            {{ .Summary }}
 						</p>
 						<a href="{{ .Permalink }}" class="btn btn-main">Read More</a>
 					</article>
