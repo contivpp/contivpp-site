@@ -10,6 +10,30 @@ image = "/img/concepts/what-is-pteropusio.png"
 
 # Contivpp.io Kubernetes Network Plugin
 
+## Problem Statement
+
+Cloud native interest and uptake is growing fast. With that comes the need for networking to keep pace, in particular where pod-to-pod connectivity is concerned. Yes the Kubernetes CNI defining an API for managing cluster pod networks is there. An there are multiple tested and deployed CNI network plugins enabling pods on the same or different hosts to talk with each other. One could say that Kubernetes Pod Networking 1.0 is complete.
+
+What is needed for K8s Pod Networking 2.0?
+
+- Policies and Services are made first-class citizens. 1.0 addresses connectivity. We need policy and service awareness at the network layer in 2.0
+
+- Performance. Sufficient in 1.0. Cloud native deployment expansion couple with application workloads sensitive to network resources constraints is a must-have. This includes any/all data-plane features such as ACLs, NAT and tunnel encap/decap.
+
+- Interface Flexibility. 2.0 must be interface versatile or in other words accomodate kernel interfaces, memif, tunnel encap/decaps, virtio and so on. 
+
+- Observability. 2.0 needs requires detailed awareness and visibility of network behavior and performance.  
+
+- API Support. The K8s API is ideal for K8s cluster management but somewhat limited for Pod networking 1.0. Existing CNI plugins incorprate their own API implementation leading to lock-in dependences. 2.0 needs a common suite of API development tools enabling cloud native and CNI developers to devote cycles to what is really important: applications.
+
+- Evolvability. K8s Pod Networking 2.0 must be innovation/deployment friendly.
+
+It goes without saying that Pod Networking 2.0 must be 100% Kubernetes compliant. In addition it is ideal to utitlize existing open source project software to build and deploy solutions. 
+
+
+## Contiv.io Solution       
+
+
 
 ## Overview
 Contivpp.io is a Kubernetes network plugin that uses [FD.io VPP](https://fd.io/)
@@ -35,41 +59,10 @@ packets into the Linux network stack (Kube Proxy), which makes them very
 effective and scalable.
 
 
-## Architecture
-
-contivpp.io consists of several components, each of them packed and shipped as
-a Docker container. Two of them deploy on Kubernetes master node only:
-
- - [Contiv KSR](#contiv-ksr)
- - [Contiv ETCD](#contiv-etcd)
-
-and the rest of them deploy on all nodes within the k8s cluster (including the master node):
-
-- [Contiv vSwitch](#contiv-vswitch)
-- [Contiv CNI](#contiv-cni)
-- [Contiv STN](#contiv-stn)
+![contivpp.io Architecture](/img/what-is-contiv-vpp/contivpp-overview-pict3.png)
 
 
-The following section briefly describes the individual Contiv components, which are displayed
-as orange boxes on the picture below:
 
-![contivpp.io Architecture](/img/what-is-contiv-vpp/contiv-arch.png)
-
-
-### Contiv KSR
-Contiv KSR (Kubernetes State Reflector)is an agent that subscribes to k8s control plane, watches k8s resources and 
-propagates all relevant cluster-related information into the Contiv ETCD data store. 
-Other Contiv components do not access the k8s API directly, they subscribe to
-Contiv ETCD instead. For more information on KSR, read the 
-[KSR Readme](https://github.com/contiv/vpp/blob/master/cmd/contiv-ksr/README.md).
-
-
-### Contiv ETCD
-contivpp.io uses its own instance of ETCD database for storage of k8s cluster-related data
-reflected by KSR, which are then accessed by Contiv vSwitch Agents running on
-individual nodes. Apart from the data reflected by KSR, ETCD also stores persisted VPP
-configuration of individual vswitches (mainly used to restore the operation after restarts), 
-as well as some more internal metadata.
 
 
 ### Contiv vSwitch
