@@ -22,7 +22,7 @@ What is needed for K8s Pod Networking 2.0?
 
 - __Observability.__ There are never enough pushed or pulled stats, telemetry, logs, tracing etc. data to be consumed by management, collection and analytics apps. 2.0 must include mechananisms to needed for detailed awareness and visibility of network behavior and performance.  
 
-- __API Support.__ The k8s API is ideal for K8s cluster management but somewhat limited cluster networking. Existing CNI plugins incorprate their own API implementation resulting in potential lock-in dependences. API development tools, plugins and management agents that allow cloud native and CNI developers to devote cycles to what is really important: applications.
+- __API Support.__ The k8s API is ideal for K8s cluster management but somewhat limited cluster networking. Existing CNI plugins incorprate their own API implementation resulting in potential lock-in dependences. API development tools, plugins and management agents makes it easy to build applications and services to interact with the underlying networking. It also allows cloud native and CNI developers to devote cycles to what is really important: applications.
 
 - __CNF.__ Embrace cloud native network functions where appropiate. This means introducing CNFs into a k8s cluster dataplane and/or to construct a service chain. 
 
@@ -31,7 +31,7 @@ What is needed for K8s Pod Networking 2.0?
 - __Evolvability.__ Translates to innovation autonomy from the existing environment while not deviating from k8s-based deployment and operations best practicies.
 
 
-It goes without saying that Pod Networking 2.0 must be 100% Kubernetes compliant and private, hybrid and public cloud friendly. In addition it is ideal to utitlize existing open source project software to build and deploy solutions. 
+It goes without saying that Pod Networking 2.0 must be 100% Kubernetes compliant as well as private, hybrid and public cloud friendly. In addition it is ideal to utitlize existing open source project software to build and deploy solutions. 
 
 ## Contivpp.io Solution       
 
@@ -50,7 +50,7 @@ Contivpp.io is a Kubernetes CNI network plugin designed and built to address pod
 
 Contivpp.io is like any other CNI plugin and thus contains all of the usual "hooks" to boostrap and manage the network. Nothing new there. 
 
-Conceptually at a high level, there are contivpp.io software components (ksr, etcd) on the master node that receive and store k8s policy and service updates in an etcd datastore. On the worker nodes, the contivpp.io components (contiv-vswitch) subscribe to etcd datastore changes and automatically reprogrammed FD.io dataplane if any appear. 
+Conceptually at a high level, there are contivpp.io control plane components (ksr, etcd) on the master node that receive and store k8s policy and service updates in an etcd datastore. On all nodes, there are control plane components to listen for updates and programm the dataplane. The contiv-vswitch include the VPP agent and FD.io/VPP. 
 
 The unique aspects of contivpp.io are:
 
