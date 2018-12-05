@@ -4,17 +4,30 @@ type = "setup"
 summary = "Setting up and Running a Contivpp.io Live Demo"
 +++
 
-# Contivpp.io Demo Coming Soon!
+# Ready to Rockn'Roll.
 
-The demo system will include:
+Included here is a self-contained, laptop-friendly (with 16meg of memory) systems consisting of a kubernetes cluster, contivpp.io and a UI. You can load it up, explore the k8s environment, contiv-vswitches and established vxlan overlay network. You can also apply and operate a k8s service and examine how contivpp.io implements the service.
 
-* Single repo to retrieve and install all code on a laptop
+## Step to Load it Up and Get Started
 
-* Generated and deploy a Kubernetes Cluster with the Contivpp.io CNI code
+	clone https://github.com/contiv/vpp
+	git checkout kubecon2018
+	cd ./ui
+	./start.sh for dummy or ./start-professional.sh for professional settings
+	after everything is built up, the UI should be automatically opened in Chrome 
 
-* Full blown GUI to observe topology and retrieve information
+## Some Sample Screenshots
 
-Other functions will be included.
+![sample](/img/blog/1.png)
+
+![sample](/img/blog/2.png)
+
+![sample](/img/blog/4.png)
+
+![sample](/img/blog/9.png)
+
+! ![sample](/img/blog/10.png)
+
 
 
 
