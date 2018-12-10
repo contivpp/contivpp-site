@@ -19,7 +19,7 @@ theme = "airspace-hugo"
   [[menu.header]]
     weight = 4
     name = "DEMO"
-    url = "/demo/demo"
+    url = "https://github.com/contiv/vpp/tree/kubecon2018/ui"
 
   [[menu.header]]
     weight = 5
