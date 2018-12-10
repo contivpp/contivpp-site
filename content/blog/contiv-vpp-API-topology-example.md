@@ -1,14 +1,14 @@
 +++
-title = "Using K8s and CONTIVPP.io APIs to Discover a Network Topology"
+title = "Using K8s and Contivpp.io APIs to Discover a Cluster Network Topology"
 type = "blog"
 author = "Chris Metz"
 date = "4 Nov 2018"
-weight = 2
+weight = "2"
 +++
 We know about k8s API but Contivpp.io comes with a bunch of APIs out of the box. You can exercise many of these API to understand how contivpp.io how works. In this blog I'll show you how a set of K8s and Contiv VPP REST APIs can assist in discovering a network topology. IP addresses, interfaces, and tunnels interconnecting pods will be needed.  
 <!--more-->
 
-# Example Using K8s and Contiv VPP APIs to Discover a Conti Network Topology
+# Example Using K8s and Contiv VPP APIs to Discover a Cluster Network Topology
 
 We know about k8s API such as but Contivpp.io comes with a bunch of APIs out of the box. You can exercise many of these API to understand how contivpp.io does what it does (poor english, I know). 
 
