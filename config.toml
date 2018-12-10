@@ -33,8 +33,13 @@ theme = "airspace-hugo"
   
   [[menu.header]]
     weight = 7
-    name = "SLACK"
-    url = "https://contivvpp.slack.com/"
+    name = "Contiv.io"
+    url = "https://CONTIV.IO/"
+
+  [[menu.header]]
+    weight = 8
+    name = "Slack"
+    url = "https://contivvpp.slack.com//"
 
 # The site's parameters
 [params]
