@@ -33,13 +33,13 @@ theme = "airspace-hugo"
   
   [[menu.header]]
     weight = 7
-    name = "Contiv.io"
-    url = "https://CONTIV.IO/"
+    name = "CONTIV.IO"
+    url = "https://C/"
 
   [[menu.header]]
     weight = 8
-    name = "Slack"
-    url = "https://contivvpp.slack.com//"
+    name = "SLACK"
+    url = "https://contivvpp.slack.com/"
 
 # The site's parameters
 [params]
@@ -48,7 +48,7 @@ theme = "airspace-hugo"
   # This license is offered with a 50% discount for all Hugo users.
   # For information see https://github.com/gohugoio/hugoThemes/issues/260
 
-  dateFormat = "6 January 2006"
+
 
 # beginning of landing page
 
