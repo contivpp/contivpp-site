@@ -1,7 +1,8 @@
 +++
-title = "What is Contivpp.io?"
+title = "Brief Description"
 type = "concepts"
-summary = "Contivpp.io is a Kubernetes CNI plugin that employs a programmable CNF vSwitch composed of an FD.io/VPP data-plane and VPP agent for feature-rich, high-performance cloud native networking."
+summary = "Outlines the Problem Statment and several important aspects of the Contivpp.io Solution"
+weight = "1"
 +++
 
 
