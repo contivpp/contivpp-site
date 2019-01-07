@@ -65,7 +65,7 @@ The [Policy Plugin Skeleton][policy-plugin] implements the [Ligato plugin API][p
 which makes it pluggable with the Ligato CN-Infra framework.
 
 The Resync procedure of the policy plugin waits until the Resync procedure
-in the [Pteropus.io plugin][contiv-plugin] has finished. This ensures that connectivity
+in the [contivpp.io plugin][contiv-plugin] has finished. This ensures that connectivity
 between pods and the VPP is established before any rules are installed.
 
 Inside the Policy Plugin's `Init()` method all the layers are initialized and
