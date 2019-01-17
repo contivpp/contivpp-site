@@ -4,6 +4,8 @@ type = "setup"
 summary = "Setup and run a Kubernetes cluster with Contivpp.io"
 +++
 
+<span style="color:red">**V2 Update Coming Shortly**</span>
+
 # Get Started
 
 You can get started with Contivpp.io using one of serveral methods:

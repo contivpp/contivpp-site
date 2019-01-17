@@ -4,11 +4,13 @@ type = "setup"
 summary = "Setting up and Running a Contivpp.io Live Demo"
 +++
 
+<span style="color:red">some **This is Red Bold.** text</span>
+
 # Ready to Rockn'Roll.
 
 Included here is a self-contained, laptop-friendly (with 16meg of memory) systems consisting of a kubernetes cluster, contivpp.io and a UI. You can load it up, explore the k8s environment, contiv-vswitches and established vxlan overlay network. You can also apply and operate a k8s service and examine how contivpp.io implements the service.
 
-## Step to Load it Up and Get Started
+## Steps to Load it Up and Get Started
 
 	clone https://github.com/contiv/vpp
 	git checkout kubecon2018

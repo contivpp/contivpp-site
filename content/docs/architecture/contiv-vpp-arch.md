@@ -5,6 +5,8 @@ summary = "Contivpp.io Architecture"
 +++
 
 
+<span style="color:red">**V2 Update Coming Shortly**</span>
+
 ## Architecture
 
 contivpp.io consists of several components, each of them packed and shipped as
