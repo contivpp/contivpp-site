@@ -9,6 +9,8 @@ weight = "1"
 
 # Contivpp.io Kubernetes Network Plugin
 
+<span style="color:red">**V2 Update Coming Shortly**</span>
+
 ## Problem Statement
 
 Cloud native interest and uptake is growing fast. With that comes the need for networking to keep pace, in particular where pod-to-pod and pod-to-service connectivity is concerned. Yes the Kubernetes CNI defining an API for managing cluster pod networks is there. And there are multiple tested and deployed [Container Network Interface (CNI)](https://kubernetes.io/docs/concepts/extend-kubernetes/compute-storage-net/network-plugins/) network plugins enabling pods on the same or different hosts to talk with each other. One could say that Kubernetes Pod Networking 1.0 is complete.

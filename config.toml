@@ -34,7 +34,7 @@ theme = "airspace-hugo"
   [[menu.header]]
     weight = 7
     name = "CONTIV.IO"
-    url = "https://C/"
+    url = "https://Contiv.io/"
 
   [[menu.header]]
     weight = 8

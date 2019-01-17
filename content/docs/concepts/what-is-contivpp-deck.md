@@ -9,6 +9,8 @@ weight = "2"
 
 ![contivpp.io Architecture](/img/what-is-contiv-vpp/slides/Slide01.png)
 
+<span style="color:red">**V2 Update Coming Shortly**</span>
+
 ## Topics Discussed
 
 * Baseline Concepts
