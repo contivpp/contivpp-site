@@ -5,8 +5,6 @@ summary = "Contivpp.io Architecture"
 +++
 
 
-<span style="color:red">**Contivpp.io V2 Update!!**</span>
-
 ## Architecture
 
 contivpp.io consists of several components, each of them packed and shipped as
@@ -101,8 +99,10 @@ the VPP and configured with the same IP address on VPP, as well as
 on the host-VPP interconnect TAP interface, as it had in the host before it. 
 For more information on STN setup, read the [Single NIC Setup README](https://github.com/contiv/vpp/blob/master/docs/SINGLE_NIC_SETUP.md).
 
+
 ### Contivpp UI
 Contivpp UI is composed of two components. The first is a customized GUI enabling the user to display the k8s cluster including the contivpp.io system pods. It also allows access to the configuration (e.g. IPAM), k8s, contivpp and namespace and k8s services mapped to contiv vswitches. The other component is a proxy providing REST APIs to the front-end GUI and per-vswitch APIs to the contiv vswitches deployed in the cluster. The contivpp UI is deployed as a docker container and is optional both in the production and demo systems.
+
 
 ### Contivpp Flow
 

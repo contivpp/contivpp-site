@@ -9,8 +9,6 @@ weight = "2"
 
 ![contivpp.io Architecture](/img/what-is-contiv-vpp/slides/Slide01.png)
 
-<span style="color:red">**V2 Update Coming Shortly**</span>
-
 ## Topics Discussed
 
 * Baseline Concepts
@@ -220,6 +218,17 @@ It includes a management/control agent for VPP and a Service Function Chain (SFC
 <br/>
 <br/>
 
+![contivpp.io slide](/img/what-is-contiv-vpp/slides/Slide17a.png)
+
+## Contiv UI
+
+
+<br/>
+<br/>
+<br/>
+<br/>
+
+
 ![contivpp.io slide](/img/what-is-contiv-vpp/slides/Slide18.png)
 
 ## Topolopgy Graph of a 3 x Node Contivpp Network
@@ -418,7 +427,7 @@ It includes a management/control agent for VPP and a Service Function Chain (SFC
 
 
 
-![contivpp.io slide](/img/what-is-contiv-vpp/slides/contivpp-contiv-netctl.png)
+![contivpp.io slide](/img/what-is-contiv-vpp/slides/contivpp-io-v2-contiv-netctl2.png)
 
 <br/>
 <br/>
