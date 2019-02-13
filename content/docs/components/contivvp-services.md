@@ -40,6 +40,7 @@ to a service.
 
 A Kubernetes service can be published to the cluster and to the outside world in
 various ways:
+
  * `ClusterIP`: exposing the service on a cluster-internal IP
  * `NodePort`: exposing the service on every node’s host stack IP at a static
    port from a pre-determined range (default: 30000-32767),
@@ -83,6 +84,7 @@ to IPv6 translator to create a MAP-E CE, likewise one can plug the NAT44
 together with MAP-T to create a MAP-T CE or 464XLAT.
 
 In Contiv-VPP the VPP-NAT plugin is used in the data-plane to:
+
  1. Load-balance and forward *IPv4* traffic between services and endpoints,
     i.e. **1-to-many NAT**,
  2. **Dynamically source-NAT** node-outbound *IPv4* traffic to enable Internet

@@ -110,6 +110,7 @@ for a pod until it has been assigned an IP address.
 
 If a change carries enough information, the processor determines the list of pods
 with a **possibly outdated** policy configuration (all pods for RESYNC):
+
  * For a changed policy this includes all the pods that the policy had assigned
    before and after the change.
  * For a changed pod (labels, IP address), this results in re-configuration
@@ -128,6 +129,7 @@ For each pod with possibly outdated policy configuration, the Processor calculat
 the set of policies currently assigned to it. The policies are then converted
 to a less-abstract `ContivPolicy` type defined in the [Configurator API][configurator-api].
 `ContivPolicy` is simpler because it contains:
+
  * Matching lists of pods evaluated from Label Selectors
  * Port numbers translated from port names
  * Lists of pods representing the namespaces containing the pods
@@ -225,6 +227,7 @@ confronted with all the traffic leaving VPP towards the pod.
 The order at which the rules are applied for a given pod is important as well.
 The renderer which applies the rules for the destination network stack has 3
 valid options of ordering:
+
  1. Apply the rules in the exact same order as passed by the Configurator
  2. Apply PERMIT rules before DENY rules: this is possible because there is
     always only one DENY rule that blocks traffic not matched by any PERMIT rule.
@@ -368,6 +371,7 @@ BuildGlobalTable:
 
 Again, the actual implementation is parametrized, allowing to choose the direction
 for which the global table should be build for:
+
  1. ingress rules of locally deployed pods -> single egress global table: used
     by ACL
  2. egress rules of locally deployed pods -> single ingress global table: used
@@ -377,6 +381,7 @@ With these transformations, the order in which the rules can be applied is more
 strict than when they originally arrived from the configurator - the order
 between PERMIT and DENY rules now matters. The renderer which applies the rules
 for the destination network stack has now only two valid options of ordering:
+
  1. Apply the rules in the exact same order as returned by the Cache for each
     table.
     Used by the ACL Renderer.
