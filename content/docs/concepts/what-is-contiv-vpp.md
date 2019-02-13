@@ -9,7 +9,6 @@ weight = "1"
 
 # Contivpp.io Kubernetes Network Plugin
 
-<span style="color:red">**V2 Update Coming Shortly**</span>
 
 ## Problem Statement
 

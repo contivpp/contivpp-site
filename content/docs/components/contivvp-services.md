@@ -17,7 +17,7 @@ the mapping of k8s services to the VPP dataplane.
 
 ## Overview
 
-A Service is a Kubernetes abstraction providing a convenient single entry point
+Service is a Kubernetes abstraction providing a convenient single entry point
 of access to a group of pods. In other words, a service can be thought of
 as a dynamic loadbalancer for a set of pods (and the containers living inside
 them), automatically managed by the K8s framework itself. The set of Pods
@@ -52,7 +52,7 @@ itself) is assigned a DNS name `<service-name.service.namespace>`. By default,
 every pod’s DNS search list will include the pod’s own namespace and the cluster’s
 default domain.
 
-contivpp.io implements Kubernetes services in the full scope of the specification
+Contiv/VPP implements Kubernetes services in the full scope of the specification
 for the IP protocol version 4.
 
 ## Kube-proxy
@@ -63,7 +63,7 @@ and can do simple TCP and UDP stream forwarding or round robin TCP/UDP
 load-balancing across a set of backends using iptables or [IPVS (IP Virtual Server)][ipvs].
 
 While other CNI plugin providers rely heavily on kube-proxy for their services
-implementations, in contivpp.io Kube proxy plays a secondary role. For the most
+implementations, in Contiv/VPP Kube proxy plays a secondary role. For the most
 part, load-balancing and translations between services and endpoints are done
 **inside VPP** using the high performance [VPP-NAT plugin](#the-vpp-nat-plugin).
 The only exception is traffic initiated from the host stack on one of the cluster
@@ -71,7 +71,7 @@ nodes - whether it is a pod with host networking, an application running
 directly on the host (outside of all containers), or an external application
 accessing a service through the host stack (e.g. in the 2-NIC use case). Clients
 accessing services from within pods connected to VPP or from the outside of the
-cluster through the primary VPP GigE interface always bypass Kube proxy.
+cluster through the primary VPP GigE interface always bypass Kube-proxy.
 
 ## The VPP-NAT plugin
 
@@ -82,16 +82,16 @@ it should be possible to plug the NAT44 function together with the MAP-E IPv4
 to IPv6 translator to create a MAP-E CE, likewise one can plug the NAT44
 together with MAP-T to create a MAP-T CE or 464XLAT.
 
-In contivpp.io the VPP-NAT plugin is used in the data-plane to:
+In Contiv-VPP the VPP-NAT plugin is used in the data-plane to:
  1. Load-balance and forward *IPv4* traffic between services and endpoints,
     i.e. **1-to-many NAT**,
  2. **Dynamically source-NAT** node-outbound *IPv4* traffic to enable Internet
     access for pods with private addresses.
 
 The following subsection describes key VPP-NAT configuration items, focusing
-on features used in the contivpp.io data plane. Certain aspects of the VPP-NAT
+on features used in the Contiv-VPP data plane. Certain aspects of the VPP-NAT
 configuration are explained in a greater detail as they play a pivotal role
-in the implementation of Kubernetes services in contivpp.io.
+in the implementation of Kubernetes services in Contiv-VPP.
 
 ### Configuration
 #### Interface features
@@ -149,9 +149,9 @@ The fields in the above structure are as follows:
  * `protocol`: IP protocol number of the service (UDP or TCP).
  * `vrf_id`: internal network VRF ID.
  * `twice_nat`: translate both the source and destination address with a single
-   rule. Twice NAT is not used in contivpp.io - source-NAT is not applied for
+   rule. Twice NAT is not used in Contiv-VPP - source-NAT is not applied for
    intra-node traffic.
- * `self-twice-nat`: a special feature added for contivpp.io to enable access
+ * `self-twice-nat`: a special feature added for Contiv to enable access
    to service from one of its own endpoints (i.e. access from itself). If you hit
    the same endpoint as the request originated from, then the source and
    destination IPs are equal after DNAT translation. This is an issue because
@@ -169,7 +169,7 @@ The fields in the above structure are as follows:
    the mapping would apply (as source NAT) also for connections initiated from
    the local IPs, replacing the source address with the external IP (breaking
    policies for example).
- * `tag`: string tag opaque to VPP-NAT plugin. Used by contivpp.io control plane
+ * `tag`: string tag opaque to VPP-NAT plugin. Used by Contiv-VPP control plane
    to associate NAT rule with the corresponding service, which is needed by the
    re-sync procedure.
  * `local_num`: the number of local endpoints.
@@ -189,7 +189,7 @@ vpp# nat44 add address 1.2.3.4
 ```
 
 #### Identity mappings
-In contivpp.io we also use of **identity mappings**. An identity mapping is a
+In Contiv/VPP we also use of **identity mappings**. An identity mapping is a
 static NAT mappings that lets a real addresses to be translated to itself,
 essentially bypassing NAT.
 
@@ -199,22 +199,19 @@ to learn how we map the state of Kubernetes services into VPP-NAT configuration.
 ### VPP-NAT plugin limitations
 
 The VPP-NAT plugin is a relatively recent addition to the VPP toolbox, and some
-of its limitations impact contivpp.io. They are:
+of its limitations impact Contiv-VPP. They are:
  1. Tracking of TCP sessions is experimental and has not been fully tested
  2. Not all dynamically created sessions are automatically cleaned up
- 3. Translations are endpoint **independent**, which affects certain communication
-    scenarios, mostly in the STN mode
 
-## Services implementation in contivpp.io control plane
+## Services implementation in Contiv-VPP control plane
 ### VPP-NAT support in the Ligato VPP Agent
 
-The VPP-NAT plugin for IPv4 is configured through the [vpp/ifplugin][vpp-agent-if-plugin]
+The VPP-NAT plugin for IPv4 is configured through the [nat-plugin][vpp-agent-nat-plugin]
 in the [Ligato VPP Agent][ligato-vpp-agent]. The plugin receives a declarative
 description of the desired NAT configuration on its northbound API, translates it
 into a sequence of [VPP-NAT binary API][vpp-nat-plugin-api] calls, which are then
 sent to GoVPP on the plugin's southbound API. These two levels of the NAT
-configuration are being kept in sync by the plugin even during VPP and agent
-restarts.
+configuration are being kept in sync even during VPP and agent restarts.
 
 On the plugin's northbound API the NAT is modeled using a [proto file][nat-model]
 definition. The northbound API model consists of two parts:
@@ -224,9 +221,9 @@ definition. The northbound API model consists of two parts:
  2. List of labeled destination-NAT instances, each with a set of static
     and/or identity mappings
 
-### Mapping of services to VPP-NAT configurations
+### Mapping of services to VPP-NAT configurations (IPv4)
 
-In contivpp.io, a service is implemented as a set of VPP-NAT static mappings,
+In Contiv/VPP, a service is implemented as a set of VPP-NAT static mappings,
 one for every external address. Static mappings of a single service are grouped
 together and exported as a single instance of the [DNAT model][nat-model]
 (destination NAT) for the [Ligato VPP Agent][ligato-vpp-agent] to configure.
@@ -277,8 +274,8 @@ All mappings are configured with `out2in-only` and `self-twice-nat` enabled.
 The latter further requires to specify the IP address of a virtual loopback,
 used to route traffic between clients and services via VPP even if the source
 and the destination are the same endpoint that would otherwise deliver
-packets locally. [Contiv plugin][contiv-plugin] exposes the IP address
-available for the NAT loopback via the API `GetNatLoopbackIP()`. It returns
+packets locally. [IPAM plugin][ipam-plugin] exposes the IP address
+available for the NAT loopback via the API `NatLoopbackIP()`. It returns
 the last unicast IP address from the range allocated for locally deployed pods.
 This address is routed into VPP from every local pod, but IPAM ensures that it
 never gets assigned to any real interface. The virtual loopback IP is added to
@@ -366,11 +363,11 @@ where the Pod can be scheduled - the host port is statically set to a fixed
 value, which automatically excludes all nodes where the same port is already
 in use as there would be a port collision otherwise.
 
-Still the feature is supported by contivpp.io, as it required no extra effort
+Still the feature is supported by Contiv/VPP, as it required no extra effort
 to get it supported. The CNI (Container Network Interface) already ships with
 [Port-mapping plugin][portmap-plugin], implementing redirection between host
 ports and container ports using iptables. We only had to enable the plugin
-in the [CNI configuration file for contivpp.io][contiv-cni-conflist].
+in the [CNI configuration file for Contiv/VPP][contiv-cni-conflist].
 Since the forwarding occurs in the realm of iptables on the host stack,
 you will not get the same performance benefits as with `VPP-NAT`-based
 redirection for NodePorts and other service types. Another limitation is that
@@ -422,46 +419,48 @@ with external networks as `Frontends`, and those connecting VPP with service
 endpoints as `Backends`. The classification of interfaces is VPP-specific and
 may not be useful for future renderers.
 
-![Service plugin layers](/img/what-is-contiv-vpp/service-plugin-layers.png)
+![Service plugin layers][layers-diagram]
 
 #### Skeleton
 
 The [Service Plugin Skeleton][service-plugin-skeleton] implements the
-[Ligato plugin API][plugin-intf], which makes it pluggable into the Ligato
+[Ligato plugin API][cn-infra], which makes it pluggable with the Ligato
 CN-Infra framework.
-
-The Resync procedure of the service plugin waits until the Resync procedure
-in the [Contiv plugin][contiv-plugin] has finished. This ensures that
-connectivity between pods and the VPP is established before any NAT rules are
-installed.
 
 Inside the Service Plugin's `Init()` method both Processor and NAT44 Renderer
 are initialized and dependency injection is performed - at the very minimum,
 every layer must depend on at least the layer below so that it can pass
 transformed data further down the stack.
 
-The Service plugin subscribes to Etcd in `subscribeWatcher()` to watch for
-changes related to [services][svc-model], [endpoints][eps-model], [pods][pod-model]
-and [node IDs/IPs][node-info-model], as reflected from the K8s API into the
-data store by the KSR. Both services and endpoints need to be watched to
-learn the mapping between service VIPs and the real pod IP addresses behind.
-Pods are monitored so that the set of Frontend and Backend interfaces is kept
-up-to-date. Lastly, IP addresses of all nodes in the cluster are needed to
-determine VIPs for NodePort services.
+Additionally, the plugin itself is an [event handler][event-handler], registered
+into the main [event loop][event-loop-guide] of the Contiv agent *after* the
+[ipv4net plugin][ipv4net-plugin]. This ensures that connectivity between pods
+and the VPP is established before any NAT rules are installed.
 
-Once subscribed, state data arrives as datasync events, which are propagated
-by the plugin without any processing into the Processor.
+The Service plugin reads the state of 2 Kubernetes [resources][db-resources]
+reflected into `etcd` by KSR and delegated to the plugin by resync and
+`KubeStateChange` events: [services][svc-model] and [endpoints][eps-model].
+Both services and endpoints need to be watched to learn the mapping between
+service VIPs and the real pod IP addresses behind.
+To keep the set of Frontend and Backend interfaces up-to-date, the plugins also
+needs to react to `AddPod` & `DeletePod` events.
+Lastly, `NodeUpdate` event is processed as well to determine and refresh the set
+of all IP addresses in the cluster for NodePort services.
+
+At the plugin skeleton layer, all the events of interest are just propagated
+further into the Processor without any processing.
 
 #### Processor
 
-Processor receives and unpacks datasync [update][processor-data-change] and
+Processor receives and unpacks [update][processor-data-change] and
 [resync][processor-data-resync] events. Service name and namespace is used
 to match [service metadata][svc-model] with the associated [endpoints][eps-model].
 The processor is also notified when locally deployed pod is created/updated or
 deleted.
 
 Additionally, the processor watches changes in the assignment of
-[cluster and management IPs][node-info-model] for all nodes in the cluster.
+cluster and management IPs for all nodes in the cluster, exposed by the
+[nodesync plugin][nodesync-plugin] through `NodeUpdate` event.
 Every time a new node is assigned an IP address or an existing one is destroyed,
 the NodePort services have to be re-configured.
 
@@ -476,9 +475,9 @@ BVI interface in the BD where all VXLAN tunnels are terminated. A service may
 have one or more endpoints deployed on another node, which makes `loop0` a
 potential Backend. Likewise, `tap0` is an entry point for potential endpoints
 in the host networking, thus we automatically mark it as Backend during resync.
-The processor learns the names of all VPP interfaces from the [Contiv plugin][contiv-plugin].
+The processor learns the names of all VPP interfaces from the [ipv4net plugin][ipv4net-plugin].
 
-The processor outputs pre-processed service data to the layer below - renderers. 
+The processor outputs pre-processed service data to the layer below - renderers.
 The [processor API][processor-api] allows to register one or more renderers
 through `RegisterRenderer()` method. Currently, the NAT44 Renderer is the only
 implemented and registered renderer.
@@ -492,13 +491,14 @@ configuration, updated every time a pod is created, destroyed, assigned to
 a service for the first time, or no longer acting as a service endpoint.
 
 NAT global configuration and DNAT instances generated in the Renderer are
-sent to the [Ligato/vpp-agent][ligato-vpp-agent] via the [local client][local-client]
-interface. The Ligato/vpp-agent in turn updates the VPP-NAT configuration through
-binary APIs. For each transaction, the [vpp/ifplugin][vpp-agent-if-plugin]
-determines the minimum set of operations that need to be executed to reflect
-the configuration changes.
+appended to the [transaction][transaction-api] prepared for the given event by the
+[Controller plugin] [controller-plugin]. The controller then commits the
+transaction with NAT configuration (and potentially also with some more changes
+from other plugins) into the [ligato/vpp-agent][ligato-vpp-agent] via the
+[local client][local-client]. At the end of the pipe is [NAT plugin][vpp-agent-nat-plugin]
+from the VPP-Agent, which applies NAT configuration into VPP through binary APIs.
 
-To allow access from service to itself, the [Contiv plugin][contiv-plugin] is
+To allow access from service to itself, the [IPAM plugin][ipam-plugin] is
 asked to provide the virtual NAT loopback IP address, which is then inserted
 into the `TwiceNAT` address pool. `self-twice-nat` feature is enabled for every
 static mapping.
@@ -511,17 +511,17 @@ IP (interface used to connect the node with the default GW) is added into the NA
 main address pool and the interface itself is switched into the post-routing NAT
 mode (`output` feature) - both during Resync. The renderer can be initialized
 to run in a SNAT-only mode, which leaves the rendering of services to another
-renderer but at least provides source-NAT for Internet access. 
+renderer but at least provides source-NAT for Internet access.
 
 To work-around the [second listed limitation of the VPP-NAT plugin](#vpp-nat-plugin-limitations),
 the renderer runs the method `idleNATSessionCleanup()` inside a go-routine,
 periodically cleaning up inactive NAT sessions.
 
-![NAT configuration example](/img/what-is-contiv-vpp/nat-configuration.png)
+![NAT configuration example][nat-configuration-diagram]
 
 
-[layers-diagram]: services/service-plugin-layers.png "Layering of the Service plugin"
-[nat-configuration-diagram]: services/nat-configuration.png "NAT configuration example"
+[layers-diagram]: /img/what-is-contiv-vpp/service-plugin-layers.png "Layering of the Service plugin"
+[nat-configuration-diagram]: /img/what-is-contiv-vpp/nat-configuration.png "NAT configuration example"
 [ks-services]: https://kubernetes.io/docs/concepts/services-networking/service/
 [kube-proxy]: https://kubernetes.io/docs/reference/command-line-tools-reference/kube-proxy/
 [ipvs]: http://kb.linuxvirtualserver.org/wiki/IPVS
@@ -529,23 +529,30 @@ periodically cleaning up inactive NAT sessions.
 [vpp-nat-plugin-api]: https://github.com/vpp-dev/vpp/blob/stable-1801-contiv/src/plugins/nat/nat.api
 [service-plugin]: https://github.com/contiv/vpp/tree/master/plugins/service
 [service-plugin-skeleton]: https://github.com/contiv/vpp/blob/master/plugins/service/plugin_impl_service.go
-[plugin-intf]: http://github.com/ligato/cn-infra/tree/master/core/plugin_spi.go
+[cn-infra]: http://github.com/ligato/cn-infra
 [processor-api]: http://github.com/contiv/vpp/tree/master/plugins/service/processor/processor_api.go
 [processor-data-change]: http://github.com/contiv/vpp/tree/master/plugins/service/processor/data_change.go
 [processor-data-resync]: http://github.com/contiv/vpp/tree/master/plugins/service/processor/data_resync.go
 [renderer-api]: http://github.com/contiv/vpp/blob/master/plugins/service/renderer/api.go
-[nat-model]: https://github.com/ligato/vpp-agent/blob/pantheon-dev/plugins/vpp/model/nat/nat.proto
-[vpp-agent-if-plugin]: https://github.com/ligato/vpp-agent/blob/pantheon-dev/plugins/vpp/ifplugin
+[nat-model]: https://github.com/ligato/vpp-agent/blob/dev/api/models/vpp/nat/nat.proto
+[vpp-agent-nat-plugin]: https://github.com/ligato/vpp-agent/tree/dev/plugins/vpp/natplugin
+[controller-plugin]: https://github.com/contiv/vpp/blob/master/plugins/controller/plugin_controller.go
+[transaction-api]: https://github.com/contiv/vpp/blob/master/plugins/controller/api/txn.go
 [ligato-vpp-agent]: http://github.com/ligato/vpp-agent
-[policies-dev-guide]: https://github.com/contiv/vpp/tree/master/docs/dev-guide/policies
-[packet-flow-dev-guide]: https://github.com/contiv/vpp/tree/master/docs/dev-guide/packet-flow
+[policies-dev-guide]: POLICIES.md
+[packet-flow-dev-guide]: PACKET_FLOW.md
 [portmap-plugin]: https://github.com/containernetworking/plugins/tree/master/plugins/meta/portmap
 [pod-model]: http://github.com/contiv/vpp/blob/master/plugins/ksr/model/pod/pod.proto
 [svc-model]: https://github.com/contiv/vpp/blob/master/plugins/ksr/model/service/service.proto
 [eps-model]: https://github.com/contiv/vpp/blob/master/plugins/ksr/model/endpoints/endpoints.proto
-[node-info-model]: https://github.com/contiv/vpp/blob/master/plugins/contiv/model/node/node.proto
+[nodesync-plugin]: https://github.com/contiv/vpp/tree/master/plugins/nodesync
 [contiv-cni-conflist]: https://github.com/contiv/vpp/blob/master/docker/vpp-cni/10-contiv-vpp.conflist
-[contiv-plugin]: http://github.com/contiv/vpp/tree/master/plugins/contiv
-[local-client]: http://github.com/ligato/vpp-agent/tree/pantheon-dev/clientv1
+[ipv4net-plugin]: https://github.com/contiv/vpp/tree/master/plugins/ipv4net
+[ipam-plugin]: https://github.com/contiv/vpp/tree/master/plugins/ipam
+[local-client]: https://github.com/ligato/vpp-agent/tree/dev/clientv2
+[event-loop-guide]: EVENT_LOOP.md
+[event-handler]: EVENT_LOOP.md#event-handler
+[db-resources]: https://github.com/contiv/vpp/tree/master/dbresources
+
 
 
