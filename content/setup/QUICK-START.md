@@ -28,7 +28,7 @@ You can get started with Contivpp.io using one of serveral methods:
 * Try [Contiv-VPP UI](https://github.com/contiv/vpp/blob/master/ui/README.md) web browser user interface on top of Contiv-VPP,
   it runs in Vagrant deployments as well as on bare-metal.
 
-## [Configuration and Troubleshooting Tools](https://github.com/contiv/vpp/blob/master/docs/TOOLS.md)
+## [Configuration and Troubleshooting Tools](https://github.com/contiv/vpp/blob/master/docs/operation/TOOLS.md)
 
 
 
