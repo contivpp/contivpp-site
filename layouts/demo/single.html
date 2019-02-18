@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+	{{ partial "head.html" . }}
+</head>
+<body>
+
+    {{ partial "header.html" . }}
+    {{ partial "docs-header.html" . }}
+    <!-- Content-->
+    <section>
+        <div class="container">
+            <div class="row">
+            <div class="col-md-12">
+                {{ if isset .Params "image" }}
+                    {{ if isset .Params "eventlink"}}<a class="post-title" href="{{ .Params.eventlink }}">{{end}}
+                    <img src="{{ .Params.image | absURL }}" class="img-responsive" alt="post-thumb">
+                    {{ if isset .Params "eventlink"}}</a>{{end}}
+                {{ end }}
+                <div class="block markdown-body">
+                {{ .Content | markdownify }}
+                </div>
+            </div>
+            </div>
+        </div>
+    </section>
+
+    <p class="center-text" style="padding: 30px;">
+      <a class="btn btn-main" href="{{ $.Site.BaseURL }}/docs">Back to Overview</a>
+    </p>
+
+
+	{{ partial "footer.html" . }}
+
+	
+</body>
+</html>

@@ -48,7 +48,7 @@ VPP state etc., or to execute a debug CLI on any of the VPPs in the cluster.
 
 
 ### Contiv ETCD
-contivpp.io uses its own instance of ETCD database for storage of k8s cluster-related data
+Contiv-VPP uses its own instance of ETCD database for storage of k8s cluster-related data
 reflected by KSR, which are then accessed by Contiv vSwitch Agents running on
 individual nodes. Apart from the data reflected by KSR, ETCD also stores persisted VPP
 configuration of individual vswitches (mainly used to restore the operation after restarts), 
@@ -70,7 +70,7 @@ network stack and data-plane NIC interface controlled by VPP:
  management interface for k8s control plane communication, or 
  [STN (Steal The NIC)](https://github.com/contiv/vpp/blob/master/docs/SINGLE_NIC_SETUP.md) deployment must be applied.
 
-**contivpp.io Agent** is the control plane part of the vSwitch container. It is responsible
+**Contiv-VPP Agent** is the control plane part of the vSwitch container. It is responsible
 for configuring the VPP according to the information gained from ETCD and requests
 from Contiv STN. It is based on the  [Ligato VPP Agent](https://github.com/ligato/vpp-agent)  
 code with extensions that are related to k8s. 
@@ -90,7 +90,7 @@ and replies with a response, which is then forwarded back to Kubelet.
 
 
 ### Contiv STN
-As already mentioned, the default setup of contivpp.io requires 2 network interfaces
+As already mentioned, the default setup of Contiv-VPP requires 2 network interfaces
 per node: one controlled by VPP for data facing PODs and one controlled by the host
 network stack for k8s control plane communication. In case that your k8s nodes
 do not provide 2 network interfaces, contivpp.io can work in the single NIC setup,
@@ -101,7 +101,7 @@ For more information on STN setup, read the [Single NIC Setup README](https://gi
 
 
 ### Contivpp UI
-Contivpp UI is composed of two components. The first is a customized GUI enabling the user to display the k8s cluster including the contivpp.io system pods. It also allows access to the configuration (e.g. IPAM), k8s, contivpp and namespace and k8s services mapped to contiv vswitches. The other component is a proxy providing REST APIs to the front-end GUI and per-vswitch APIs to the contiv vswitches deployed in the cluster. The contivpp UI is deployed as a docker container and is optional both in the production and demo systems.
+Contivpp UI is composed of two components. The first is a customized GUI enabling the user to display the k8s cluster including the Contiv-VPP system pods. It also allows access to the configuration (e.g. IPAM), k8s, contivpp and namespace and k8s services mapped to contiv vswitches. The other component is a proxy providing REST APIs to the front-end GUI and per-vswitch APIs to the contiv vswitches deployed in the cluster. The contivpp UI is deployed as a docker container and is optional both in the production and demo systems.
 
 
 ### Contivpp Flow

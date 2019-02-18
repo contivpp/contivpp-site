@@ -7,7 +7,7 @@ weight = "1"
 
 
 
-# Contivpp.io Kubernetes Network Plugin
+# Contiv-VPP Kubernetes Network Plugin
 
 
 ## Problem Statement
@@ -35,9 +35,11 @@ What is needed for K8s Pod Networking 2.0?
 
 It goes without saying that Pod Networking 2.0 must be 100% Kubernetes compliant as well as private, hybrid and public cloud friendly. In addition it is ideal to utitlize existing open source project software to build and deploy solutions. 
 
-## Contivpp.io Solution       
+# Contiv-VPP Kubernetes Network Plugin
 
-Contivpp.io is a Kubernetes CNI network plugin designed and built to address pod networking 2.0 requirements. It uses [FD.io VPP](https://fd.io/)to provide policy and service-aware dataplane functionality consistent with k8s orchestration and lifecycle management.
+##  Solution       
+
+ Contiv-VPP is a Kubernetes CNI network plugin designed and built to address pod networking 2.0 requirements. It uses [FD.io VPP](https://fd.io/)to provide policy and service-aware dataplane functionality consistent with k8s orchestration and lifecycle management.
 
  The important new features are:
 
@@ -48,11 +50,11 @@ Contivpp.io is a Kubernetes CNI network plugin designed and built to address pod
 - Programmability enabled by an VPP agent that expedites the mapping of k8s policies and services into FD.io/VPP dataplance configuration.   
 
 
-![contivpp.io Architecture](/img/what-is-contiv-vpp/contivpp-overview-pict4.png)
+![ Architecture](/img/what-is-contiv-vpp/contivpp-overview-pict4.png)
 
-Contivpp.io is like any other CNI plugin and thus contains all of the usual "hooks" to boostrap and manage the network. Nothing new there. 
+Contiv-VPP is like any other CNI plugin and thus contains all of the usual "hooks" to boostrap and manage the network. Nothing new there. 
 
-Conceptually at a high level, there are contivpp.io control plane components (ksr, etcd) on the master node that receive and store k8s policy and service updates in an etcd datastore. On all nodes, there are control plane components to listen for updates and programm the dataplane. The contiv-vswitch include the VPP agent and FD.io/VPP. 
+Conceptually at a high level, there are Contiv-VPP control plane components (ksr, etcd) on the master node that receive and store k8s policy and service updates in an etcd datastore. On all nodes, there are control plane components to listen for updates and programm the dataplane. The contiv-vswitch include the VPP agent and FD.io/VPP. 
 
 The unique aspects of contivpp.io are:
 

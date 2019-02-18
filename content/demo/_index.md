@@ -1,4 +1,4 @@
 +++
 title = "Demo"
-type = "setup"
+type = "demo"
 +++
