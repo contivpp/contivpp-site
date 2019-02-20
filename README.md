@@ -11,7 +11,7 @@ NOTE: The theme has been added as a git submodule, so to ensure this is checked 
 when you clone this repository, run your clone as follows:
 
 ```
-git clone --recurse-submodules https://github.com/pteropusio/pteropusio-site.git
+git clone --recurse-submodules git@github.com:contivpp/contivpp-site.git
 ```
 
 To quickly install Hugo, follow [this link](https://gohugo.io/getting-started/quick-start/).
