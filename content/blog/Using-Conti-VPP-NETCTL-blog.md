@@ -317,7 +317,7 @@ vagrant@k8s-master:~$ contiv-netctl vppdump k8s-master linux-interface-watcher
 ]
 
 ```
-As outputs of this and other vppdump commands are provided in VPP "CLI-ese" or JSON formats, it is beneficial to possess in-depth knowledge of VPP, kubernetes clusters and how Contiv-VPP. Because of this and a unwritten rule of confining blog posts to a maximum 5-minute read, I did not include detailed explanations of all outputs.
+As outputs of this and other vppdump commands are provided in VPP "CLI-ese" or JSON formats, it is beneficial to possess in-depth knowledge of VPP, kubernetes clusters and how Contiv-VPP works. Because of this and a unwritten rule of confining blog posts to a maximum 5-minute read, I did not include detailed explanations of all outputs.
 
 ### About the Author
 
