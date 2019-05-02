@@ -4,7 +4,6 @@ type = "pointers"
 summary = "Contivpp.io documentation pointers"
 +++
 
-<h1><span style="color:red">Contiv-VPP is New!</span></h1>
 
 # Documentation
 
@@ -21,6 +20,11 @@ summary = "Contivpp.io documentation pointers"
 [K8s Services Engine](https://github.com/contiv/vpp/blob/master/docs/dev-guide/SERVICES.md)
 
 [K8s Policy Engine](https://github.com/contiv/vpp/blob/master/docs/dev-guide/POLICIES.md)
+
+[Configuration and Troubleshooting Tools](https://github.com/contiv/vpp/blob/master/docs/operation/TOOLS.md)
+
+[Contiv-VPP Netctl](/blog/using-conti-vpp-netctl-blog)
+
 
 
 ## Ligato 

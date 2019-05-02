@@ -36,6 +36,11 @@ theme = "airspace-hugo"
     name = "BLOG"
     url = "/blog"
 
+[[menu.header]]
+    weight = 7
+    name = "SLACK"
+    url = "https://contivvpp.slack.com"
+
 # The site's parameters
 [params]
 
@@ -52,8 +57,8 @@ theme = "airspace-hugo"
 #  points to slider.html under themes/../partials
   [params.slider]
     enable = true
-    title = "contivpp.io (NEW!)"
-    subtitle = "Contiv-VPP is a new Kubernetes CNI plugin that employs a programmable CNF vSwitch based on FD.io/VPP offering feature-rich, high-performance cloud native networking and services."
+    title = "contivpp.io"
+    subtitle = "Contiv-VPP is a Kubernetes CNI plugin that employs a programmable CNF vSwitch based on FD.io/VPP offering feature-rich, high-performance cloud native networking and services."
 
 #  points to wrapper.html under themes/../partials
   [params.wrapper]
