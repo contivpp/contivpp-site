@@ -39,7 +39,7 @@ theme = "airspace-hugo"
 [[menu.header]]
     weight = 7
     name = "SLACK"
-    url = "https://contivvpp.slack.com"
+    url = "https://join.slack.com/t/contivvpp/shared_invite/enQtNTc3OTE5ODkwODk3LWQxZDQ1MGQ3MzE4MDI3OGVkMDU4MjliMDcxODYwYjliMDZhMGFlY2MxMDA5MWQwZDRlMzJjZDBlMWYzNWJhNWY"
 
 # The site's parameters
 [params]
