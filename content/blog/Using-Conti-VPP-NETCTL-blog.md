@@ -3,7 +3,7 @@ title = "Using Contiv-VPP Netctl"
 type = "blog"
 author = "Robin Tuszik"
 date = "26 Feb 2019"
-weight = "1"
+weight = "3"
 +++ 
 
 Contiv-VPP ```contiv-netctl``` is a command line interface (CLI) for querying information about Contiv-VPP components (include contiv-vswitches) operating inside a kubernetes (k8s) cluster.  This blopg covers contiv-netctl syntax, describes the available commands, and provides common examples.```contiv-netctl``` is installed on the K8s-master host during the installation of the Contiv-VPP CNI plugin.

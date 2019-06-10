@@ -58,11 +58,13 @@ Contiv-VPP is like any other CNI plugin and thus contains all of the usual "hook
 
 Conceptually at a high level, there are Contiv-VPP control plane components (ksr, etcd) on the master node that receive and store k8s policy and service updates in an etcd datastore. On all nodes, there are contiv components that listen for updates and program the dataplane. The contiv-vswitch includes the Ligato VPP agent and FD.io/VPP packaged in a single container.
 
-The unique aspects of contivpp.io are:
+The unique aspects of Contiv-VPP are:
 
 * __k8s Policy and Service Mapping to FD.io/VPP Configuration.__ This is an automated distribution pipeline where k8s policies and services are automatically reflected into FD.io/VPP configuration information which is then programmed into the network.    
 
 * __contiv-vswitch__ It is composed the FD.io/VPP dataplane and the Ligato VPP agent. It is across APIs enabled by the Ligato VPP agent/plugins that configurations rendered from policy and services are pushed down into the FD.io/VPP dataplane. The contiv-vswitch runs completely in userspace and uses [DPDK](https://dpdk.org/) for direct access to the network I/O layer. 
+
+* __IPv6/SRv6__ In many scenarios, a k8s requires the use of a network address translation (NAT) component so client pods can access services identified with an internal clusterIP address. This introduces another level of indirection which adds complexity and could impact scale/performance. IPv6 CNI configuration is now supported. In addition, segment routing IPv6 which is a form of source-routing using IPv6 addresses is now implemented. No NAT and IPv6 support are the value-adds.
 
 
 

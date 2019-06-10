@@ -84,6 +84,7 @@ theme = "airspace-hugo"
 * Observability using Prometheus and VPP trace functions
 * Core component is the programmable CNF vSwitch built from open source FD.io/VPP and Ligato VPP Agent/APIs
 * Full Kubernetes CNI support
+* IPv6/SRv6 support
 * Runs in user space
 * 100% open source
 </br>

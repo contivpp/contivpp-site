@@ -25,6 +25,10 @@ summary = "Contivpp.io documentation pointers"
 
 [Contiv-VPP Netctl](/blog/using-conti-vpp-netctl-blog)
 
+[IPV6](https://github.com/contiv/vpp/blob/master/docs/setup/IPV6.md)
+
+[SRV6](https://github.com/contiv/vpp/blob/master/docs/setup/SRV6.md)
+
 
 
 ## Ligato 
@@ -35,6 +39,6 @@ summary = "Contivpp.io documentation pointers"
 
 [Ligato Agent KV Scheduler](https://docs.ligato.io/en/latest/developer-guide/kvscheduler/)
 
-[Ligato VPP Agent](https://docs.ligato.io/en/latest/intro/agent/)
+[Ligato VPP Agent](https://docs.ligato.io/en/latest/intro/overview/)
 
 
