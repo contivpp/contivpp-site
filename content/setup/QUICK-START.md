@@ -1,7 +1,7 @@
 +++
-title = "Contivpp.io Quick Start"
+title = "Contiv - VPP Quick Start"
 type = "setup"
-summary = "Setup and run a Kubernetes cluster with Contivpp.io"
+summary = "Setup and run a Kubernetes cluster with Contiv - VPP"
 +++
 
 
@@ -19,15 +19,14 @@ You can get started with Contivpp.io using one of serveral methods:
   or more bare-metal or VM hosts.
 
 * Use the [Arm64-specific kubeadm install](https://github.com/contiv/vpp/blob/master/docs/arm64/MANUAL_INSTALL_ARM64.md)
-  instructions to manually install Kubernetes with Contiv-VPP networking on one or more
-  bare-metal servers of Arm64 platform.
+  instructions to manually install Kubernetes with Contiv-VPP networking on one or more bare metal or VM servers
+  for the Arm64 platform.
 
 * Use the [Calico-VPP Vagrant](https://github.com/contiv/vpp/blob/master/vagrant/calico-vpp/README.md) to explore deployment of VPP
   in Calico clusters, where some of the nodes can be running plain Calico (without VPP)
   and some of the nodes can be running Calico with VPP.
 
-* Try [Contiv-VPP UI](https://github.com/contiv/vpp/blob/master/ui/README.md) web browser user interface on top of Contiv-VPP,
-  it runs in Vagrant deployments as well as on bare-metal.
+* Try the [Contiv-VPP UI](https://github.com/contiv/vpp/blob/master/ui/README.md) web browser user interface. 
 
 ## [Configuration and Troubleshooting Tools](https://github.com/contiv/vpp/blob/master/docs/operation/TOOLS.md)
 
