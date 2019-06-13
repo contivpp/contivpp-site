@@ -16,7 +16,7 @@ You can get started with Contivpp.io using one of serveral methods:
 
 * Use the [Contiv-specific kubeadm install](https://github.com/contiv/vpp/blob/master/docs/setup/MANUAL_INSTALL.md)
   instructions to manually install Kubernetes with Contiv-VPP networking on one
-  or more bare-metal servers.
+  or more bare-metal or VM hosts.
 
 * Use the [Arm64-specific kubeadm install](https://github.com/contiv/vpp/blob/master/docs/arm64/MANUAL_INSTALL_ARM64.md)
   instructions to manually install Kubernetes with Contiv-VPP networking on one or more
