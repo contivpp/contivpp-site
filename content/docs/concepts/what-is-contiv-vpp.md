@@ -1,7 +1,7 @@
 +++
 title = "Brief Description"
 type = "concepts"
-summary = "Outlines the Problem Statment and several important aspects of the Contivpp.io Solution"
+summary = "Outlines the problem statment and several important aspects of the Contiv - VPP Solution"
 weight = "1"
 +++
 
