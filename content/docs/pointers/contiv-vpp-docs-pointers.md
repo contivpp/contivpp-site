@@ -29,6 +29,8 @@ summary = "Contivpp.io documentation pointers"
 
 [SRV6](https://github.com/contiv/vpp/blob/master/docs/setup/SRV6.md)
 
+[SFC](https://github.com/contiv/vpp/tree/master/k8s/examples/sfc)
+
 
 
 ## Ligato 
