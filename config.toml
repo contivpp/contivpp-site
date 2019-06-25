@@ -39,7 +39,7 @@ theme = "airspace-hugo"
 [[menu.header]]
     weight = 7
     name = "SLACK"
-    url = "https://join.slack.com/t/contivvpp/shared_invite/enQtNTc3OTE5ODkwODk3LWQxZDQ1MGQ3MzE4MDI3OGVkMDU4MjliMDcxODYwYjliMDZhMGFlY2MxMDA5MWQwZDRlMzJjZDBlMWYzNWJhNWY"
+    url = "https://cvppslackin.herokuapp.com"
 
 # The site's parameters
 [params]
@@ -85,6 +85,7 @@ theme = "airspace-hugo"
 * Core component is the programmable CNF vSwitch built from open source FD.io/VPP and Ligato VPP Agent/APIs
 * Full Kubernetes CNI support
 * IPv6/SRv6 support
+* Service Function Chaining
 * Runs in user space
 * 100% open source
 </br>

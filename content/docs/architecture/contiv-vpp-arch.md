@@ -7,7 +7,7 @@ summary = "Contivpp.io Architecture"
 
 ## Architecture
 
-contivpp.io consists of several components, each of them packed and shipped as
+Contiv-VPP consists of several components, each of them packed and shipped as
 a Docker container. Two of them deploy on Kubernetes master node only:
 
  - [Contiv KSR](#contiv-ksr)
