@@ -14,7 +14,7 @@ when you clone this repository, run your clone as follows:
 git clone --recurse-submodules git@github.com:contivpp/contivpp-site.git
 ```
 
-To quickly install Hugo, follow [this link](https://gohugo.io/getting-started/quick-start/).
+Follow the instructions at this [this link](https://gohugo.io/getting-started/quick-start/) to install Hugo.
 
 To run the site after cloning (with fast rendering disabled), run the following:
 
