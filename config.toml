@@ -3,6 +3,12 @@ baseURL = "https://contivpp.io/"
 languageCode = "en-us"
 theme = "airspace-hugo"
 
+[markup]
+[markup.goldmark]
+[markup.goldmark.renderer]
+unsafe = true
+
+
 # main menu
 [menu]
 
