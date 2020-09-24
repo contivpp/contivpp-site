@@ -1,22 +1,20 @@
 +++
-title = "Using K8s and Contivpp.io APIs to Discover a Cluster Network Topology"
+title = "Using K8s and Contiv-VPP APIs to Discover a Cluster Network Topology"
 type = "blog"
 author = "Chris Metz"
 date = "14 Nov 2018"
 weight = "2"
 +++ 
 
-We know about k8s API but Contivpp.io comes with a bunch of APIs out of the box. You can exercise many of these API to understand how contivpp.io how works. In this blog I'll show you how a set of K8s and Contiv VPP REST APIs can assist in discovering a network topology. IP addresses, interfaces, and tunnels interconnecting pods will be needed.  
+We know about Kubernetes (K8s) API. Contiv-VPP comes with its own set of REST APIs out of the box. You can exercise many of these APIs to gain a better understanding of how it works. In this blog, we'll look at how a set of K8s and Contiv VPP REST APIs can be used to discover a cluster network topology.  
 <!--more-->
 
-# Example Using K8s and Contiv VPP APIs to Discover a Cluster Network Topology
+# Example Using K8s and Contiv-VPP APIs to Discover a Cluster Network Topology
 
-We know about k8s API such as but Contivpp.io comes with a bunch of APIs out of the box. You can exercise many of these API to understand how contivpp.io does what it does (poor english, I know). 
-
-In this example we will exercise a set of K8s and Contiv VPP REST APIs to assist in discovering a network topology. IP addresses, interfaces, and tunnels interconnecting pods will be needed. This example covers a subset of the network but can be can easily replicated to construct the entire network topology.
+We know about Kubernetes (K8s) API. Contiv-VPP comes with its own set of REST APIs out of the box. You can exercise many of these APIs to gain a better understanding of how it works. In this blog, we'll look at how a set of K8s and Contiv VPP REST APIs can be used to discover a cluster network topology.  This example covers a subset of the network but can be can easily replicated to construct the entire network topology.
 
 
-![Here is a cluster using contivpp.io and several application pods applied](/img/blog/1.png). Let's see what a subset of the topology appears from the viewpoint of k8s-worker2 in our 3 x node cluster. BTW the illustrations used in this blog are lifted from our [contivpp.io demo app](/demo/demo).
+![Here is a cluster using contiv-vpp and several application pods applied](/img/blog/1.png)Let's see what a subset of the topology appears from the viewpoint of k8s-worker2 in our 3 x node cluster. The illustrations used in this blog are lifted from our [Contiv VPP demo app](/demo/demo).
 
 ## VPP-IP Addresses 
 
@@ -30,12 +28,12 @@ From [github networking notes](https://github.com/contiv/vpp/blob/master/docs/NE
 	addressable outside of the node itself. The only requirement is that this subnet should not collide with any other IPAM subnet.
 
 
-So VPP-IP addresses facing pods are always 10.2.1.x/32 on any node. We need this because the other end of an interface (i.e. tap) is the IP address of a pod.
+So, VPP-IP addresses facing pods are always 10.2.1.x/32 on any node. We need this because the other end of an interface (i.e. tap) is the IP address of a pod.
 
 
 ## Finding the POD-IP address
 
-So how do we find it. This contiv-netctl command provides the answer. 
+How do we discover the IP address of the pod? This contiv-netctl command provides the answer. 
 
 	vagrant@k8s-master:~$contiv-netctl pods
 
@@ -55,11 +53,12 @@ So how do we find it. This contiv-netctl command provides the answer.
 	POD-NAME                  NAMESPACE    POD-IP     VPP-IP     IF-IDX  IF-NAME  INTERNAL-IF-NAME    HOST-IP
 	nginx-64f497f8fd-rlkg7    default      `10.1.3.9`   10.2.1.9   7       tap2     tap5d62d2bb6c4774d  10.20.0.11
 
+Here is how it appears using the contiv-netctl command modal in our app.
 
 
 ![Here is how it appears using the contiv-netctl command modal in our app](/img/blog/9.png)
 
-But we need REST APIs, not k8s contiv-netctl terminal CLI commands. Let's continue 
+We would like to use REST APIs to solve this problem. Not CLI solutions such as kubetctl or contiv-netctl. Let's continue. 
 
 
 ## Obtain the POD-IP Address Facing the contiv vswitch
@@ -87,9 +86,9 @@ and prepending it to the selflink metadata contained in pod API call response me
 
 	curl http://localhost:8080/api/v1/namespaces/default/pods/nginx-64f497f8fd-rlkg7
 
-We use a snippet because the JSN response of all of the pods is massive.
+We use a snippet because the JSON response for all of the pods is massive.
 
-In the response we have
+In the response we have:
 
 	"hostIP": "10.20.0.11",
     "podIP": "10.1.3.9",
@@ -101,7 +100,7 @@ NGINX pod IP address is 10.1.3.9 running on the K8s-worker2 host with an IP addr
 ## Obtain the VPP-IP Address Facing the Pod
 
 
-Next we need to figure out VPP-IP interface and address. Arp tables contain the local IP and Mac addresses of hosts on the subnet. Therefore we can assume that ARP table on the contiv vswitch will contain the IP address of the Pod at the other end of the interface.
+Next, we need to figure out VPP-IP interface and address. Arp tables contain the local IP and Mac addresses of hosts on the subnet. Therefore we can assume that ARP table on the contiv vswitch will contain the IP address of the Pod at the other end of the interface.
 
 The ARP table maintained by VPP on k8s-worker2 can be retrieved using:
 
@@ -154,10 +153,10 @@ The ARP table maintained by VPP on k8s-worker2 can be retrieved using:
 	]
 
 
-Looking at the response we see that the interface with "SwIfIndex": 7 has an ARP cache entry for 10.1.3.9. Our NGINX podIP! There is an interface on the contiv vswitch connecting the NGINX POD-IP address of 10.1.3.9.
+Looking at the response, we see that the interface with "SwIfIndex": 7 has an ARP cache entry for 10.1.3.9. Our NGINX podIP! There is an interface on the contiv vswitch connecting the NGINX POD-IP address of 10.1.3.9.
 
 
-Next we need to find out the IP address of this interface. This can be accomplished by calling the interfaces REST API on K8s-worker2 and use "SwIfIndex": 7 to look up the IP address (for brevity sake, we only retrieve tap interfaces).
+Next, we need to find out the IP address of this interface. This can be accomplished by calling the interfaces REST API on K8s-worker2 and use "SwIfIndex": 7 to look up the IP address (for brevity sake, we only retrieve tap interfaces).
 
 
 	vagrant@k8s-worker2:~$ curl http://0.0.0.0:9999/vpp/dump/v1/interfaces/tap
@@ -378,11 +377,11 @@ We need to filter by vrf and type.
 
 ## Show Pod Networking Topology (or part of it)
 
-Here we want to show how contivpp.io sets up the network so that pods on different hosts (nodes) can talk to each other. Logically speaking
+Here we want to show how contiv-vpp sets up the network so that pods on different hosts (nodes) can talk to each other. Logically speaking,
 we have pods in a VRF connected up with a vxlan bridge virtual interface (vxlanBVI) inside a host. The vxlanBVI interface and associated vxlan tunnel interfaces make up the bridge domain.
 
 
-- previous section showed us how to learn which pods are connected to which interface (usually tap) on the vswitch. Again inside a single node.
+- previous section showed us how to learn which pods are connected to which interface (usually tap) on the vswitch. Again, inside a single node.
 
 
 - REST API interfaces call (shown above) returns all interfaces on the vswitch inside a host. Tap interfaces with VPP-IP addresses (10.2.1.x) and the vxlanBVI interfaces are contained in a VRF. So a VRF interface set is (tap1, tapn, ... vxlanBVI). Note that vxlan tunnel interfaces along with their source and destination IP addresses are included in the API response as well.
@@ -430,6 +429,6 @@ We see vxlanBVI and the two vxlan tunnel interfaces (e.g. this is k8-master so o
 
 - vxlan interface tunnel source and destination IP addresses come from: nodeInterconnectCIDR: 192.168.16.0/24. Note vxlan tunnel IP addresses on nodes are terminated on the physical interface (e.g. GigabitEthernet0/8/0).
 
-So there you have. This involved a bit of "restful" gymnastics and surely subsequent releases will have new APIs symplifying topology. What this does show is the initial release of contivpp.io comes with a suite of documented APIs ready to be launched.
+So there you have. This involved a bit of "restful" gymnastics but we were able to see under the covers how K8s and contiv-vpp employ REST APIs to retrieve information from the network.
 
 Start RESTing!
