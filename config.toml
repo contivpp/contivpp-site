@@ -64,13 +64,16 @@ unsafe = true
   [params.slider]
     enable = true
     title = "contivpp.io"
-    subtitle = "Contiv-VPP is a Kubernetes CNI plugin that employs a programmable CNF vSwitch based on FD.io/VPP offering feature-rich, high-performance cloud native networking and services."
+    subtitle = "Contiv-VPP is a Kubernetes CNI plugin employing a programmable CNF vSwitch based on open source FD.io/VPP offering feature-rich, high-performance cloud native networking and services."
 
 #  points to wrapper.html under themes/../partials
   [params.wrapper]
     enable = true
     title = "Challenges"
-    paragraph = "Kubernetes defines the Container Network Interface (CNI) – an API for network plugins providing connectivity between PODs. That’s worked well so far, but as cloud native deployments grow and more services are added, new solutions are needed. First, there is currently no API to map Kubernetes services and policies to network configurations so it’s up to network plugin implementers to figure that out. A standard suite of APIs based on open source code would solve that problem. Second, the current use of kube-proxy (with iptables) limits network performance, scale and feature updates required to meet new service and policy demands. Moving all network functions (including data plane and control plane) to user space increases performance, scale, reliability and innovation velocity."
+    paragraph = "Kubernetes defines the Container Network Interface (CNI) – an API for network plugins providing connectivity between PODs. That’s worked well so far, but as your cloud native deployments grow and enhanced services are added, new solutions are needed. <br><br>First, there is <strong>currently no API to map Kubernetes services and policies to network configurations</strong> so it’s up to you or the network plugin implementers to figure this out. A standard suite of <strong>APIs based on open source code would solve that problem for you</strong>. <br><br>Second, the use of <strong>kube-proxy (with iptables) limits network performance, scale and feature update cycles.</strong> required to meet your service and policy demands. Moving all <strong>network functions (including data plane and control plane) to user space increases performance, scale, reliability and innovation velocity.</strong>"
+
+
+
 
   [params.blog]
     enable = true
@@ -86,9 +89,9 @@ unsafe = true
 
 * Kubernetes services and policies traffic mapped to the FD.io/VPP data plane
 * Automatically reprograms FD.io/VPP data plane upon service and policy updates received over Kubernetes APIs
-* Accomodates high performance memif interfaces for inter-VPP communications along with existing veth/tap interfaces
+* Supports high performance memif interfaces for inter-VPP communications.
 * Observability using Prometheus and VPP trace functions
-* Core component is the programmable CNF vSwitch built from open source FD.io/VPP and Ligato VPP Agent/APIs
+* Programmable CNF vSwitch built from open source FD.io/VPP and Ligato VPP Agent/APIs
 * Full Kubernetes CNI support
 * IPv6/SRv6 support
 * Service Function Chaining
