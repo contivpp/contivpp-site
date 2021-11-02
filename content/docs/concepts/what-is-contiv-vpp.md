@@ -56,7 +56,7 @@ It goes without saying that pod networking 2.0 must be 100% Kubernetes compliant
 
 
 ![ Architecture](/img/what-is-contiv-vpp/contivpp-overview-pict4.png)
-<p style="text-align: center; font-weight: bold">High-level Contiv-VPP architecture</p>
+<p style="text-align: center; font-weight: bold">Figure: High-level overview of a cluster running Contiv-VPP</p>
 
 Contiv-VPP is like any other CNI plugin that contains all of the usual "hooks" to bootstrap and manage the network. 
 

@@ -7,14 +7,17 @@ summary = "Contivpp.io Architecture"
 
 ## Architecture
 
-Contiv-VPP consists of several components, each of them packed and shipped as
-a Docker container. Two of them deploy on Kubernetes master node only:
+Contiv-VPP is composed of several components, each packaged and shipped as
+a Docker container. 
+
+The components that you run on the control plane node consist of the following:
 
  - [Contiv KSR](#contiv-ksr)
  - [Contiv CRD + Netctl](#Contiv-CRD-netctl)
  - [Contiv ETCD](#contiv-etcd)
 
-and the rest of them deploy on all nodes within the k8s cluster (including the master node):
+
+The components that you run on worker nodes consist of the following: 
 
 - [Contiv vSwitch](#contiv-vswitch)
 - [Contiv CNI](#contiv-cni)
@@ -23,36 +26,36 @@ and the rest of them deploy on all nodes within the k8s cluster (including the m
 - [Contivpp System Flow](#contivpp-system-flow)
 
 
-The following section briefly describes the individual Contiv components, which are displayed
-as orange boxes on the picture below:
+<strong>Note:</strong>. You can set up your cluster to run the worker node components on the control plane. 
+
+---
+
+This section provides an architecture diagram along with a brief description of the components.
 
 
 ![contivpp arch](/img/what-is-contiv-vpp/contivpp-v2-arch-new.png)
+<p style="text-align: center; font-weight: bold">Figure: Contiv-VPP Architecture</p>
 
 ### Contiv KSR
-Contiv KSR (Kubernetes State Reflector)is an agent that subscribes to k8s control plane, watches k8s resources and 
-propagates all relevant cluster-related information into the Contiv ETCD data store. 
-Other Contiv components do not access the k8s API directly, they subscribe to
-Contiv ETCD instead. For more information on KSR, read the 
-[KSR Readme](https://github.com/contiv/vpp/blob/master/cmd/contiv-ksr/README.md).
+[Kubernetes State Reflector]((https://github.com/contiv/vpp/blob/master/cmd/contiv-ksr/README.md)) (KSR) agent subscribes to K8s control plane, watches K8s resources and 
+propagates all relevant cluster-related information to the Contiv ETCD data store. 
+
+The other Contiv components don't access the K8s API directly. Instead, they subscribe to the
+Contiv ETCD data store. 
 
 ### Contiv CRD netctl
-Contiv CRD handles k8s Custom Resource Definitions defined in k8s API and
-processes them into configuration in Contiv ETCD. Currently it covers 
-Contiv-specific configuration of individual k8s nodes such as IP address and default
-gateway, etc. Apart from this functionality, it also runs periodic validation
-of the topology, and exports the results as another CRD entry.
-The `contiv-netctl` tool which sits in the same Docker container can be used to
-explore runtime state of the cluster, such us current IPAM assignments,
-VPP state etc., or to execute a debug CLI on any of the VPPs in the cluster.
+The [Contiv CRD](https://github.com/contiv/vpp/blob/master/docs/operation/TOOLS.md#contiv--vpp-custom-resource-definitions-crds) handles K8s custom resource definitions (CRD) defined in the K8s API. The CRDs are converted
+into configuration data and put to the Contiv ETCD data store. The data includes the configuration individual K8s nodes such as IP address and default
+gateway. The Contiv CRD runs a periodic validation of your topology and exports the results as another CRD entry.
+
+You can use the [contiv-netctl](https://contivpp.io/blog/using-conti-vpp-netctl-blog/) CLI tool to
+explore runtime state of the cluster and debug the VPP data plane components in the cluster.
 
 
 ### Contiv ETCD
-Contiv-VPP uses its own instance of ETCD database for storage of k8s cluster-related data
-reflected by KSR, which are then accessed by Contiv vSwitch Agents running on
-individual nodes. Apart from the data reflected by KSR, ETCD also stores persisted VPP
-configuration of individual vswitches (mainly used to restore the operation after restarts), 
-as well as some more internal metadata.
+Contiv-VPP uses its own etcd data store for storing K8s cluster-related data
+reflected by the KSR agent and VPP configuratin data. The contiv-vswitch agents running on your
+individual nodes access the configuration, mostly to restore operation after restarts. The data store also contains internal metadata. 
 
 
 ### Contiv vSwitch
