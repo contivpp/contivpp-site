@@ -6,10 +6,10 @@ date = "26 Feb 2019"
 weight = "3"
 +++ 
 
-Contiv-VPP ```contiv-netctl``` is a command line interface (CLI) for querying information about Contiv-VPP components (include contiv-vswitches) operating inside a kubernetes (k8s) cluster.  This blopg covers contiv-netctl syntax, describes the available commands, and provides common examples.```contiv-netctl``` is installed on the K8s-master host during the installation of the Contiv-VPP CNI plugin.
+Contiv-VPP ```contiv-netctl``` is a command line interface (CLI) for querying information about Contiv-VPP componentsoperating inside a Kubernetes (K8s) cluster.  This blog covers `contiv-netctl` syntax, describes the available commands, and provides common examples.```contiv-netctl``` is installed on the K8s control plane during the installation of the Contiv-VPP CNI plugin.
 <!--more--> 
 
-In order to obtain information on nodes and pods, the Contiv-Netctl communicates with the Contiv-ETCD. The ETCD provides basic information including the status of contiv pods and the nodes where they reside. For information about contiv-vswitches and including VPP CLI support, contiv-netctl communicates with the Contiv-VPP Agent. There is one contiv-vpp agent per contiv-vswitch. This agent is connected to other Contiv-VPP parts of the Contiv setup. This is illustrated in the diagram below. 
+In order to obtain information on nodes and pods, `contiv-netctl` communicates with the contiv ETCD data store. This ETCD data store contains configuration information including the status of contiv pods and the nodes where they reside. For information about contiv-vswitches and including VPP CLI support, contiv-netctl communicates with the Contiv-VPP Agent. There is one contiv-vpp agent per contiv-vswitch. This agent is connected to other Contiv-VPP parts of the Contiv setup. This is illustrated in the diagram below. 
 
 ![Contiv-netctl](/img/blog/contiv-netctl-arch.png)
 

@@ -1,7 +1,7 @@
 +++
 title = "Description"
 type = "concepts"
-summary = "Outlines the problem statment and several important aspects of the Contiv - VPP Solution"
+summary = "Outlines the problem statement and important aspects of the Contiv - VPP Solution"
 weight = "1"
 +++
 
@@ -16,13 +16,20 @@ Cloud native interest and uptake is growing fast. With that comes the need for n
 
 You have a  multitude of [Kubernetes CNI plugins](https://kubernetes.io/docs/concepts/extend-kubernetes/compute-storage-net/network-plugins/) to choose from, all providing you with basic pod network connectivity. You could say that Kubernetes pod networking 1.0 is complete.
 
+<br>
+
+![k8s-net](/img/what-is-contiv-vpp/k8s-net-one-two.drawio.svg)
+<p style="text-align: center; font-weight: bold">Figure: K8s pod networking 1.0 evolving towards K8s pod networking 2.0</p>
+
+<br>
+
 What is needed for K8s pod networking 2.0?
 
 - __Make policies and services first-class citizens.__ In effect, you have K8s policy and service awareness at the network layer.
 
 - __Performance.__ Application workloads sensitive to network resource constraints is a reality. This includes applications using any/all data plane features such as ACLs, NAT, IPsec and tunnel encap/decap.
 
-- __Interface Versatility.__ Must accommodate your classic kernel interfaces (e.g. tap, veth) and newer, performance optimized interfaces such as memif.  
+- __Interface Versatility.__ Must accommodate your classic kernel interfaces (e.g. tapv2, veth) and newer, performance optimized interfaces such as memif.  
 
 - __Observability.__ You can never have enough pushed or pulled stats, telemetry, logs and tracing consumed by your management and observability apps. Any solution must include mechanisms providing you with detailed awareness and visibility of network behavior and performance.  
 
@@ -37,7 +44,7 @@ What is needed for K8s pod networking 2.0?
 - __Evolvability.__ Translates to innovation autonomy from the existing environment while not deviating from K8s-based deployment and operations best practices.
 
 
-It goes without saying that pod networking 2.0 must be 100% Kubernetes compliant and private, hybrid and public cloud-friendly.   
+It goes without saying that pod networking 2.0 must be 100% Kubernetes compliant, and private/hybrid/public cloud-friendly.   
 
 
 ##  Solution       
@@ -54,9 +61,12 @@ It goes without saying that pod networking 2.0 must be 100% Kubernetes compliant
 
 - contiv-netctl for CLI management and control.
 
+<br>
 
-![ Architecture](/img/what-is-contiv-vpp/contivpp-overview-pict4.png)
-<p style="text-align: center; font-weight: bold">High-level Contiv-VPP architecture</p>
+![ Architecture](/img/what-is-contiv-vpp/k8s-contiv-vpp-arch.png)
+<p style="text-align: center; font-weight: bold">Figure: High-level overview of a cluster running Contiv-VPP</p>
+
+<br>
 
 Contiv-VPP is like any other CNI plugin that contains all of the usual "hooks" to bootstrap and manage the network. 
 
@@ -68,7 +78,7 @@ The unique aspects of Contiv-VPP are:
 
 * __contiv-vswitch__ composed of the FD.io/VPP data plane and the Ligato VPP agent. The contiv-vswitch runs in user space and uses [DPDK](https://dpdk.org/) for direct access to the network I/O layer. 
 
-* __IPv6/SRv6__ In many scenarios, a K8s deployment requires a network address translation (NAT) component so that client pods can access services identified with an internal clusterIP address.<br><br>This introduces another level of indirection which adds complexity and impacts scale and performance. Contiv-VPP supports IPv6 CNI SRv6 so you do not require a NAT function in your deployment. 
+* __IPv6/SRv6__ In many scenarios, a K8s deployment requires a network address translation (NAT) component so that client pods can access services identified with an internal clusterIP address. This introduces another level of indirection that adds complexity and impacts scale and performance. Contiv-VPP supports IPv6/SRv6 CNI so you do not require a NAT function in your deployment. 
 
 
 
